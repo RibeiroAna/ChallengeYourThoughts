@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Redirect, Stack, router, useFocusEffect } from 'expo-router';
+import { useHeaderHeight } from 'expo-router/react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +17,7 @@ export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
+  const headerHeight = useHeaderHeight();
   const [thoughts, setThoughts] = useState<Thought[]>([]);
 
   useFocusEffect(
@@ -35,7 +37,7 @@ export default function HomeScreen() {
       : t('home.belief', { value: thought.initialBelief });
 
   return (
-    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+    <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
       <Stack.Screen
         options={{
           headerRight: () => (

@@ -36,8 +36,8 @@
     },
     "step2": {
       "title": "Quanto você acredita nesse pensamento agora?",
-      "save": "Salvar",
-      "saveAndChallenge": "Salvar e desafiar"
+      "save": "Salvar para depois",
+      "saveAndChallenge": "Desafiar este pensamento agora"
     },
     "step3": {
       "title": "Olhe para as evidências",
@@ -47,14 +47,13 @@
       "addFor": "Adicionar evidência a favor",
       "addAgainst": "Adicionar evidência contra",
       "placeholder": "Escreva uma evidência",
-      "weight": "Quanto convence: {{value}}%",
+      "weight": "Quão convincente é isso?",
       "remove": "Remover evidência",
-      "balanceLabel": "Equilíbrio das evidências",
-      "balanceFor": "A favor: {{value}}",
-      "balanceAgainst": "Contra: {{value}}"
+      "done": "Concluir esta evidência",
+      "edit": "Editar evidência"
     },
     "step4": {
-      "title": "Algum padrão de pensamento?",
+      "title": "Você percebe alguns desses padrões de pensamento no seu pensamento?",
       "hint": "Toque em um padrão para ler mais. Selecione os que se encaixam, ou nenhum.",
       "example": "Exemplo",
       "select": "Selecionar",
@@ -63,7 +62,10 @@
     "step5": {
       "title": "Um olhar mais equilibrado",
       "alternativeLabel": "Pensamento alternativo",
-      "alternativePlaceholder": "Qual seria uma forma mais equilibrada de ver isso?",
+      "alternativePlaceholder": "Qual seria uma forma mais equilibrada de ver isso?"
+    },
+    "step6": {
+      "title": "Quanto você acredita nele agora?",
       "rerate": "Quanto você acredita no pensamento original agora?",
       "alternativeBelief": "Quanto você acredita no pensamento alternativo? (opcional)",
       "rateAlternative": "Avaliar",
@@ -93,7 +95,10 @@
     "editChallenge": "Editar",
     "deleteTitle": "Excluir este pensamento?",
     "deleteBody": "Isso não pode ser desfeito.",
-    "notFound": "Este pensamento não existe mais."
+    "notFound": "Este pensamento não existe mais.",
+    "download": "Baixar como Markdown",
+    "status": "Status",
+    "exportError": "Não foi possível compartilhar o arquivo. Tente novamente."
   },
   "patterns": {
     "all_or_nothing": {
@@ -221,6 +226,31 @@
       "body": "Não há conta. Tudo o que você escreve fica neste aparelho e nunca é enviado a lugar nenhum.",
       "disclaimer": "Este app apoia a prática da TCC. Ele não substitui um terapeuta nem ajuda profissional.",
       "crisis": "Se você estiver em crise ou pensando em se machucar, procure imediatamente o serviço de emergência local ou uma linha de apoio emocional."
+    }
+  },
+  "balance": {
+    "label": "Equilíbrio das evidências",
+    "for": "A favor: {{value}}",
+    "against": "Contra: {{value}}"
+  },
+  "scale": {
+    "belief": {
+      "0": "Nem um pouco",
+      "1": "Um pouco",
+      "2": "Mais ou menos",
+      "3": "Moderadamente",
+      "4": "Bastante",
+      "5": "Muito",
+      "6": "Completamente"
+    },
+    "convincing": {
+      "0": "Nada convincente",
+      "1": "Pouco convincente",
+      "2": "Mais ou menos convincente",
+      "3": "Moderadamente convincente",
+      "4": "Bastante convincente",
+      "5": "Muito convincente",
+      "6": "Totalmente convincente"
     }
   }
 }

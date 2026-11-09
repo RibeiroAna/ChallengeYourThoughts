@@ -23,7 +23,7 @@ Status: pre-implementation. Items marked **[Decision needed]** are not settled y
 
 ## 2. Thought-challenge flow
 
-Every thought goes through Steps 1–2. After Step 2, the user chooses **Save** (stop here) or **Save & challenge** (continue to Steps 3–5). A thought that was only saved can be challenged later from the thought list.
+Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it for later** (stop here) or **Challenge this thought now** (continue to Steps 3–6). A thought that was only saved can be challenged later from the thought list.
 
 ### Step 1 — Capture the thought
 - Free-text input.
@@ -31,16 +31,18 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save** 
 
 ### Step 2 — Initial belief
 - "How much do you believe this thought right now?"
-- Slider from 0–100%.
-- Actions: **Save** | **Save & challenge**.
+- Slider from 0–100%, with a verbal scale next to the percentage (e.g. "Not at all" … "Completely").
+- Actions: **Save it for later** | **Challenge this thought now**.
 
 ### Step 3 — Evidence
 - Two lists: **Evidence for** the thought and **Evidence against** it.
 - The user can add, edit, and remove any number of items in each list. Text or dictation.
-- Each item gets a **weight** (how strong/convincing that evidence is), as a slider from 1–100%.
-- Optional: show a simple visual balance of total weight "for" vs "against".
+- Each item gets a **weight** (how strong/convincing that evidence is), as a slider from 1–100%, with a verbal scale (e.g. "Not convincing at all" … "Completely convincing").
+- A check button closes an item once it's written; tapping a closed item reopens it for editing.
+- The visual balance of total weight "for" vs "against" is shown only once the challenge is finished (completion screen and thought page), not while collecting evidence.
 
 ### Step 4 — Thinking patterns (cognitive distortions)
+- Prompt: "Do you perceive some of these thinking patterns in your thought?"
 - Multi-select list. Each pattern has a short explanation and an example, shown on tap.
 - Initial set:
   - All-or-nothing thinking
@@ -57,8 +59,11 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save** 
   - Personalisation / blame
 - Selecting none is allowed.
 
-### Step 5 — Re-evaluation
+### Step 5 — Alternative thought
 - Write an **alternative (balanced) thought** (text or dictation).
+
+### Step 6 — Re-rating
+- On its own page.
 - Re-rate belief in the **original thought** (same scale as Step 2).
 - Optional: rate belief in the alternative thought.
 - Show the change in belief (e.g. "80% → 45%").
@@ -75,6 +80,7 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save** 
 ### Thought history
 - List of all thoughts, newest first, showing status and belief before → after.
 - Open a thought to view it, edit it, start/continue its challenge, or delete it.
+- Download a thought as a Markdown (`.md`) file through the system share sheet (local file only; nothing is uploaded by the app).
 
 ### Reminders
 - The user can set one or more reminders at specific times, with weekdays selectable per reminder.

@@ -1,10 +1,14 @@
 import { useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Stack, router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useHeaderHeight } from 'expo-router/react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
+import { useScaleLabel } from '../../../components/BeliefSlider';
 import { Button } from '../../../components/Button';
+import { EvidenceBalance } from '../../../components/EvidenceBalance';
 import { StatusBadge } from '../../../components/StatusBadge';
 import {
   deleteThought,
@@ -13,6 +17,7 @@ import {
   type EvidenceSide,
   type ThoughtWithDetails,
 } from '../../../db/thoughts';
+import { shareThoughtAsMarkdown } from '../../../export/markdown';
 import { radius, spacing, useColors } from '../../../theme';
 
 export default function ThoughtDetailScreen() {
@@ -20,6 +25,8 @@ export default function ThoughtDetailScreen() {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
+  const headerHeight = useHeaderHeight();
+  const scaleLabel = useScaleLabel();
   const [thought, setThought] = useState<ThoughtWithDetails | null | undefined>(undefined);
 
   useFocusEffect(
@@ -31,7 +38,7 @@ export default function ThoughtDetailScreen() {
   if (thought === undefined) return null;
   if (thought === null) {
     return (
-      <View style={[styles.screen, styles.center, { backgroundColor: colors.background }]}>
+      <View style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
         <Text style={{ color: colors.text }}>{t('detail.notFound')}</Text>
       </View>
     );
@@ -58,6 +65,11 @@ export default function ThoughtDetailScreen() {
       },
     ]);
 
+  const download = () =>
+    shareThoughtAsMarkdown(thought, t, i18n.language).catch(() => Alert.alert(t('detail.exportError')));
+
+  const beliefText = (value: number) => `${value}% · ${scaleLabel('belief', value)}`;
+
   const row = (label: string, value: string) => (
     <View style={styles.row}>
       <Text style={[styles.label, { color: colors.textMuted }]}>{label}</Text>
@@ -81,6 +93,9 @@ export default function ThoughtDetailScreen() {
               <Text style={[styles.value, { color: side === 'for' ? colors.evidenceFor : colors.evidenceAgainst }]}>
                 {e.weight}%
               </Text>
+              <Text style={[styles.label, styles.weightLabel, { color: colors.textMuted }]}>
+                {scaleLabel('convincing', e.weight, 1)}
+              </Text>
             </View>
           ))
         )}
@@ -92,7 +107,16 @@ export default function ThoughtDetailScreen() {
   const date = new Date(thought.createdAt).toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short' });
 
   return (
-    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+    <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <Pressable accessibilityRole="button" accessibilityLabel={t('detail.download')} onPress={download} hitSlop={12}>
+              <Ionicons name="download-outline" size={24} color={colors.text} />
+            </Pressable>
+          ),
+        }}
+      />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.metaRow}>
           <StatusBadge status={thought.status} />
@@ -101,11 +125,12 @@ export default function ThoughtDetailScreen() {
         <View style={[styles.quote, { borderLeftColor: colors.primary, backgroundColor: colors.surface }]}>
           <Text style={[styles.quoteText, { color: colors.text }]}>{thought.text}</Text>
         </View>
-        {row(t('detail.initialBelief'), `${thought.initialBelief}%`)}
+        {row(t('detail.initialBelief'), beliefText(thought.initialBelief))}
         {reachedChallenge && (
           <>
             {evidenceList('for')}
             {evidenceList('against')}
+            {thought.status === 'challenged' && <EvidenceBalance evidence={thought.evidence} />}
             <View style={styles.block}>
               <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.patterns')}</Text>
               <Text style={[styles.value, { color: colors.text }]}>
@@ -115,8 +140,8 @@ export default function ThoughtDetailScreen() {
               </Text>
             </View>
             {thought.alternativeThought ? row(t('detail.alternative'), thought.alternativeThought) : null}
-            {thought.finalBelief != null && row(t('detail.finalBelief'), `${thought.finalBelief}%`)}
-            {thought.alternativeBelief != null && row(t('detail.alternativeBelief'), `${thought.alternativeBelief}%`)}
+            {thought.finalBelief != null && row(t('detail.finalBelief'), beliefText(thought.finalBelief))}
+            {thought.alternativeBelief != null && row(t('detail.alternativeBelief'), beliefText(thought.alternativeBelief))}
           </>
         )}
       </ScrollView>
@@ -146,7 +171,8 @@ const styles = StyleSheet.create({
   block: { gap: spacing.xs },
   label: { fontSize: 14 },
   value: { fontSize: 16, lineHeight: 22 },
-  evidenceRow: { flexDirection: 'row', gap: spacing.sm },
+  evidenceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  weightLabel: { width: '100%', paddingLeft: spacing.md, marginTop: -spacing.xs },
   actions: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, gap: spacing.sm },
   actionRow: { flexDirection: 'row', gap: spacing.sm },
 });

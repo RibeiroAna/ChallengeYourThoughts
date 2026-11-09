@@ -3,6 +3,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 import { getCalendars } from 'expo-localization';
+import { useHeaderHeight } from 'expo-router/react-navigation';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../components/Button';
@@ -135,6 +136,7 @@ function ReminderCard({
 export default function RemindersScreen() {
   const { t } = useTranslation();
   const colors = useColors();
+  const headerHeight = useHeaderHeight();
   const [reminders, setReminders] = useState<Reminder[]>(() => listReminders());
   const [denied, setDenied] = useState(false);
 
@@ -159,7 +161,7 @@ export default function RemindersScreen() {
   return (
     <ScrollView
       style={{ backgroundColor: colors.background }}
-      contentContainerStyle={styles.content}
+      contentContainerStyle={[styles.content, { paddingTop: headerHeight + spacing.md }]}
     >
       {reminders.length === 0 && <Text style={[styles.empty, { color: colors.textMuted }]}>{t('reminders.empty')}</Text>}
       {reminders.map((reminder) => (

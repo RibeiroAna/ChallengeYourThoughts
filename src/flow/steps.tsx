@@ -4,9 +4,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
-import { BeliefSlider } from '../components/BeliefSlider';
+import { BeliefSlider, useScaleLabel } from '../components/BeliefSlider';
 import { Button } from '../components/Button';
 import { DictationInput } from '../components/DictationInput';
+import { EvidenceBalance } from '../components/EvidenceBalance';
 import { Mascot } from '../components/Mascot';
 import {
   DEFAULT_WEIGHT,
@@ -74,6 +75,7 @@ export function InitialBeliefStep({ draft, update }: StepProps) {
       <StepHeader title={t('flow.step2.title')} />
       <BeliefSlider
         label={t('detail.initialBelief')}
+        scale="belief"
         value={draft.initialBelief}
         onChange={(initialBelief) => update({ initialBelief })}
       />
@@ -85,74 +87,80 @@ export function InitialBeliefStep({ draft, update }: StepProps) {
 
 function EvidenceItem({
   item,
+  open,
+  onOpen,
+  onDone,
   onChange,
   onRemove,
   colors,
 }: {
   item: Evidence;
+  open: boolean;
+  onOpen: () => void;
+  onDone: () => void;
   onChange: (changes: Partial<Evidence>) => void;
   onRemove: () => void;
   colors: Colors;
 }) {
   const { t } = useTranslation();
-  return (
-    <View style={[styles.evidence, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-      <View style={styles.evidenceTop}>
+  const scaleLabel = useScaleLabel();
+
+  if (!open) {
+    return (
+      <Pressable
+        accessibilityRole="button"
+        accessibilityHint={t('flow.step3.edit')}
+        onPress={onOpen}
+        style={[styles.evidence, styles.evidenceClosed, { backgroundColor: colors.surface, borderColor: colors.border }]}
+      >
         <View style={styles.flex}>
-          <DictationInput
-            label={t('flow.step3.placeholder')}
-            value={item.text}
-            onChangeText={(text) => onChange({ text })}
-            placeholder={t('flow.step3.placeholder')}
-            minHeight={48}
-            autoFocus={!item.text}
-          />
+          <Text style={[styles.body, { color: colors.text }]}>{item.text}</Text>
+          <Text style={[styles.evidenceMeta, { color: colors.textMuted }]}>
+            {scaleLabel('convincing', item.weight, 1)} · {item.weight}%
+          </Text>
         </View>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t('flow.step3.remove')}
-          onPress={onRemove}
-          hitSlop={8}
-          style={styles.remove}
-        >
-          <Ionicons name="close" size={22} color={colors.textMuted} />
-        </Pressable>
-      </View>
+        <Ionicons name="create-outline" size={20} color={colors.textMuted} />
+      </Pressable>
+    );
+  }
+
+  return (
+    <View style={[styles.evidence, { backgroundColor: colors.surface, borderColor: colors.primary }]}>
+      <DictationInput
+        label={t('flow.step3.placeholder')}
+        value={item.text}
+        onChangeText={(text) => onChange({ text })}
+        placeholder={t('flow.step3.placeholder')}
+        minHeight={48}
+        autoFocus={!item.text}
+      />
       <BeliefSlider
-        label={t('flow.step3.weight', { value: item.weight })}
-        valueLabel=""
+        label={t('flow.step3.weight')}
+        scale="convincing"
         min={1}
         max={100}
         value={item.weight}
         onChange={(weight) => onChange({ weight })}
       />
-    </View>
-  );
-}
-
-function EvidenceBalance({ evidence }: { evidence: Evidence[] }) {
-  const { t } = useTranslation();
-  const colors = useColors();
-  const total = (side: EvidenceSide) =>
-    evidence.filter((e) => e.side === side && e.text.trim()).reduce((sum, e) => sum + e.weight, 0);
-  const forTotal = total('for');
-  const againstTotal = total('against');
-  if (forTotal + againstTotal === 0) return null;
-  const forShare = forTotal / (forTotal + againstTotal);
-  return (
-    <View
-      style={styles.balance}
-      accessible
-      accessibilityLabel={`${t('flow.step3.balanceLabel')}: ${t('flow.step3.balanceFor', { value: forTotal })}, ${t('flow.step3.balanceAgainst', { value: againstTotal })}`}
-    >
-      <Text style={[styles.sectionLabel, { color: colors.text }]}>{t('flow.step3.balanceLabel')}</Text>
-      <View style={styles.balanceBar}>
-        <View style={{ flex: forShare, backgroundColor: colors.evidenceFor }} />
-        <View style={{ flex: 1 - forShare, backgroundColor: colors.evidenceAgainst }} />
-      </View>
-      <View style={styles.balanceLegend}>
-        <Text style={{ color: colors.evidenceFor }}>{t('flow.step3.balanceFor', { value: forTotal })}</Text>
-        <Text style={{ color: colors.evidenceAgainst }}>{t('flow.step3.balanceAgainst', { value: againstTotal })}</Text>
+      <View style={styles.evidenceActions}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('flow.step3.remove')}
+          onPress={onRemove}
+          hitSlop={8}
+          style={styles.iconButton}
+        >
+          <Ionicons name="trash-outline" size={22} color={colors.danger} />
+        </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('flow.step3.done')}
+          onPress={onDone}
+          hitSlop={8}
+          style={[styles.doneButton, { backgroundColor: colors.primary }]}
+        >
+          <Ionicons name="checkmark" size={24} color={colors.primaryText} />
+        </Pressable>
       </View>
     </View>
   );
@@ -161,12 +169,35 @@ function EvidenceBalance({ evidence }: { evidence: Evidence[] }) {
 export function EvidenceStep({ draft, update }: StepProps) {
   const { t } = useTranslation();
   const colors = useColors();
+  // Items being written; finished items are shown closed. Existing evidence starts closed.
+  const [openKeys, setOpenKeys] = useState<Set<string>>(
+    () => new Set(draft.evidence.filter((e) => !e.text.trim()).map((e) => e.key)),
+  );
 
-  const add = (side: EvidenceSide) =>
-    update((d) => ({ evidence: [...d.evidence, { key: newEvidenceKey(), side, text: '', weight: DEFAULT_WEIGHT }] }));
+  const setOpen = (key: string, open: boolean) =>
+    setOpenKeys((keys) => {
+      const next = new Set(keys);
+      if (open) next.add(key);
+      else next.delete(key);
+      return next;
+    });
+
+  const add = (side: EvidenceSide) => {
+    const key = newEvidenceKey();
+    update((d) => ({ evidence: [...d.evidence, { key, side, text: '', weight: DEFAULT_WEIGHT }] }));
+    setOpen(key, true);
+  };
   const change = (key: string, changes: Partial<Evidence>) =>
     update((d) => ({ evidence: d.evidence.map((e) => (e.key === key ? { ...e, ...changes } : e)) }));
-  const remove = (key: string) => update((d) => ({ evidence: d.evidence.filter((e) => e.key !== key) }));
+  const remove = (key: string) => {
+    update((d) => ({ evidence: d.evidence.filter((e) => e.key !== key) }));
+    setOpen(key, false);
+  };
+  const done = (item: Evidence) => {
+    // Closing an empty item discards it.
+    if (!item.text.trim()) remove(item.key);
+    else setOpen(item.key, false);
+  };
 
   const section = (side: EvidenceSide) => (
     <View style={styles.section}>
@@ -184,7 +215,10 @@ export function EvidenceStep({ draft, update }: StepProps) {
           <EvidenceItem
             key={item.key}
             item={item}
+            open={openKeys.has(item.key)}
             colors={colors}
+            onOpen={() => setOpen(item.key, true)}
+            onDone={() => done(item)}
             onChange={(changes) => change(item.key, changes)}
             onRemove={() => remove(item.key)}
           />
@@ -203,7 +237,6 @@ export function EvidenceStep({ draft, update }: StepProps) {
       <StepHeader title={t('flow.step3.title')} hint={t('flow.step3.hint')} />
       {section('for')}
       {section('against')}
-      <EvidenceBalance evidence={draft.evidence} />
     </>
   );
 }
@@ -281,13 +314,10 @@ export function PatternsStep({ draft, update }: StepProps) {
   );
 }
 
-// Step 5 — re-evaluation
+// Step 5 — alternative thought
 
-export function ReevaluationStep({ draft, update }: StepProps) {
+export function AlternativeStep({ draft, update }: StepProps) {
   const { t } = useTranslation();
-  const colors = useColors();
-  const finalBelief = draft.finalBelief ?? draft.initialBelief;
-
   return (
     <>
       <ThoughtQuote text={draft.text} />
@@ -297,52 +327,77 @@ export function ReevaluationStep({ draft, update }: StepProps) {
         value={draft.alternativeThought ?? ''}
         onChangeText={(alternativeThought) => update({ alternativeThought })}
         placeholder={t('flow.step5.alternativePlaceholder')}
-        minHeight={120}
+        minHeight={140}
       />
+    </>
+  );
+}
+
+// Step 6 — re-rating
+
+export function RerateStep({ draft, update }: StepProps) {
+  const { t } = useTranslation();
+  const colors = useColors();
+  const finalBelief = draft.finalBelief ?? draft.initialBelief;
+
+  return (
+    <>
+      <ThoughtQuote text={draft.text} />
+      <StepHeader title={t('flow.step6.title')} />
       <BeliefSlider
-        label={t('flow.step5.rerate')}
+        label={t('flow.step6.rerate')}
+        scale="belief"
         value={finalBelief}
         onChange={(value) => update({ finalBelief: value })}
       />
       <Text style={[styles.change, { color: colors.primary }]}>
-        {t('flow.step5.change', { before: draft.initialBelief, after: finalBelief })}
+        {t('flow.step6.change', { before: draft.initialBelief, after: finalBelief })}
       </Text>
-      {draft.alternativeBelief == null ? (
-        <View style={styles.optionalRow}>
-          <Text style={[styles.body, styles.flex, { color: colors.text }]}>{t('flow.step5.alternativeBelief')}</Text>
-          <Button
-            title={t('flow.step5.rateAlternative')}
-            variant="secondary"
-            onPress={() => update({ alternativeBelief: 50 })}
-          />
+      {draft.alternativeThought?.trim() ? (
+        <View style={styles.alternativeBlock}>
+          <ThoughtQuote text={draft.alternativeThought} />
+          {draft.alternativeBelief == null ? (
+            <View style={styles.optionalRow}>
+              <Text style={[styles.body, styles.flex, { color: colors.text }]}>
+                {t('flow.step6.alternativeBelief')}
+              </Text>
+              <Button
+                title={t('flow.step6.rateAlternative')}
+                variant="secondary"
+                onPress={() => update({ alternativeBelief: 50 })}
+              />
+            </View>
+          ) : (
+            <View style={styles.optional}>
+              <BeliefSlider
+                label={t('flow.step6.alternativeBelief')}
+                scale="belief"
+                value={draft.alternativeBelief}
+                onChange={(alternativeBelief) => update({ alternativeBelief })}
+              />
+              <Button
+                title={t('flow.step6.skipAlternative')}
+                variant="ghost"
+                onPress={() => update({ alternativeBelief: null })}
+                style={styles.alignEnd}
+              />
+            </View>
+          )}
         </View>
-      ) : (
-        <View style={styles.optional}>
-          <BeliefSlider
-            label={t('flow.step5.alternativeBelief')}
-            value={draft.alternativeBelief}
-            onChange={(alternativeBelief) => update({ alternativeBelief })}
-          />
-          <Button
-            title={t('flow.step5.skipAlternative')}
-            variant="ghost"
-            onPress={() => update({ alternativeBelief: null })}
-            style={styles.alignEnd}
-          />
-        </View>
-      )}
+      ) : null}
     </>
   );
 }
 
 // Completion
 
-export function CompleteStep({ before, after, onDone }: { before: number; after: number; onDone: () => void }) {
+export function CompleteStep({ draft, onDone }: { draft: ThoughtWithDetails; onDone: () => void }) {
   const { t } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
+  const after = draft.finalBelief ?? draft.initialBelief;
   return (
-    <View style={[styles.flex, { backgroundColor: colors.background }]}>
+    <View style={styles.flex}>
       <ScrollView contentContainerStyle={styles.complete}>
         <Mascot variant="stretch" size={220} />
         <Text accessibilityRole="header" style={[styles.title, styles.centerText, { color: colors.text }]}>
@@ -350,8 +405,9 @@ export function CompleteStep({ before, after, onDone }: { before: number; after:
         </Text>
         <Text style={[styles.body, styles.centerText, { color: colors.text }]}>{t('flow.complete.body')}</Text>
         <Text style={[styles.change, styles.centerText, { color: colors.primary }]}>
-          {t('flow.step5.change', { before, after })}
+          {t('flow.step6.change', { before: draft.initialBelief, after })}
         </Text>
+        <EvidenceBalance evidence={draft.evidence} />
       </ScrollView>
       <View style={{ padding: spacing.md, paddingBottom: insets.bottom + spacing.md }}>
         <Button title={t('flow.complete.backHome')} onPress={onDone} />
@@ -373,12 +429,12 @@ const styles = StyleSheet.create({
   sectionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   sectionLabel: { fontSize: 17, fontWeight: '600' },
   dot: { width: 12, height: 12, borderRadius: 6 },
-  evidence: { borderWidth: 1, borderRadius: radius.md, padding: spacing.sm, gap: spacing.xs },
-  evidenceTop: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.xs },
-  remove: { padding: spacing.xs, marginTop: spacing.sm },
-  balance: { gap: spacing.sm, marginTop: spacing.sm },
-  balanceBar: { flexDirection: 'row', height: 14, borderRadius: 7, overflow: 'hidden' },
-  balanceLegend: { flexDirection: 'row', justifyContent: 'space-between' },
+  evidence: { borderWidth: 1, borderRadius: radius.md, padding: spacing.sm, gap: spacing.sm },
+  evidenceClosed: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, padding: spacing.md },
+  evidenceMeta: { fontSize: 14, marginTop: 2 },
+  evidenceActions: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  iconButton: { padding: spacing.sm },
+  doneButton: { width: 48, height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center' },
   patterns: { gap: spacing.sm },
   pattern: { borderWidth: 1, borderRadius: radius.md, paddingHorizontal: spacing.sm },
   patternRow: { flexDirection: 'row', alignItems: 'center', minHeight: 52 },
@@ -395,8 +451,9 @@ const styles = StyleSheet.create({
   patternTitle: { flex: 1, fontSize: 16, fontWeight: '500' },
   patternDetails: { gap: spacing.sm, paddingBottom: spacing.md, paddingLeft: 42, paddingRight: spacing.sm },
   change: { fontSize: 17, fontWeight: '600' },
+  alternativeBlock: { gap: spacing.sm, marginTop: spacing.md },
   optionalRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   optional: { gap: spacing.xs },
   alignEnd: { alignSelf: 'flex-end' },
-  complete: { flexGrow: 1, justifyContent: 'center', padding: spacing.lg, gap: spacing.md },
+  complete: { flexGrow: 1, justifyContent: 'center', padding: spacing.lg, gap: spacing.md, alignItems: 'center' },
 });

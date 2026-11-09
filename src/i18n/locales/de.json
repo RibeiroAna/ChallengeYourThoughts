@@ -36,8 +36,8 @@
     },
     "step2": {
       "title": "Wie sehr glaubst du diesen Gedanken gerade?",
-      "save": "Speichern",
-      "saveAndChallenge": "Speichern & hinterfragen"
+      "save": "Für später speichern",
+      "saveAndChallenge": "Diesen Gedanken jetzt hinterfragen"
     },
     "step3": {
       "title": "Schau dir die Belege an",
@@ -47,14 +47,13 @@
       "addFor": "Beleg dafür hinzufügen",
       "addAgainst": "Beleg dagegen hinzufügen",
       "placeholder": "Schreib einen Beleg auf",
-      "weight": "Wie überzeugend: {{value}} %",
+      "weight": "Wie überzeugend ist das?",
       "remove": "Beleg entfernen",
-      "balanceLabel": "Verhältnis der Belege",
-      "balanceFor": "Dafür: {{value}}",
-      "balanceAgainst": "Dagegen: {{value}}"
+      "done": "Beleg fertig",
+      "edit": "Beleg bearbeiten"
     },
     "step4": {
-      "title": "Erkennst du Denkmuster?",
+      "title": "Erkennst du einige dieser Denkmuster in deinem Gedanken?",
       "hint": "Tippe auf ein Muster, um mehr zu lesen. Wähle die passenden aus – oder keins.",
       "example": "Beispiel",
       "select": "Auswählen",
@@ -63,7 +62,10 @@
     "step5": {
       "title": "Ein ausgewogenerer Blick",
       "alternativeLabel": "Alternativer Gedanke",
-      "alternativePlaceholder": "Wie könnte man das ausgewogener sehen?",
+      "alternativePlaceholder": "Wie könnte man das ausgewogener sehen?"
+    },
+    "step6": {
+      "title": "Wie sehr glaubst du es jetzt?",
       "rerate": "Wie sehr glaubst du den ursprünglichen Gedanken jetzt?",
       "alternativeBelief": "Wie sehr glaubst du den alternativen Gedanken? (optional)",
       "rateAlternative": "Bewerten",
@@ -93,7 +95,10 @@
     "editChallenge": "Bearbeiten",
     "deleteTitle": "Diesen Gedanken löschen?",
     "deleteBody": "Das kann nicht rückgängig gemacht werden.",
-    "notFound": "Diesen Gedanken gibt es nicht mehr."
+    "notFound": "Diesen Gedanken gibt es nicht mehr.",
+    "download": "Als Markdown herunterladen",
+    "status": "Status",
+    "exportError": "Die Datei konnte nicht geteilt werden. Bitte versuche es erneut."
   },
   "patterns": {
     "all_or_nothing": {
@@ -221,6 +226,31 @@
       "body": "Es gibt kein Konto. Alles, was du schreibst, bleibt auf diesem Gerät und wird nirgendwohin gesendet.",
       "disclaimer": "Diese App unterstützt dich beim Üben von KVT. Sie ersetzt keine Therapie und keine professionelle Hilfe.",
       "crisis": "Wenn du in einer Krise bist oder daran denkst, dir etwas anzutun, wende dich bitte sofort an den örtlichen Notruf oder eine Krisenhotline."
+    }
+  },
+  "balance": {
+    "label": "Verhältnis der Belege",
+    "for": "Dafür: {{value}}",
+    "against": "Dagegen: {{value}}"
+  },
+  "scale": {
+    "belief": {
+      "0": "Überhaupt nicht",
+      "1": "Ein wenig",
+      "2": "Etwas",
+      "3": "Mittelmäßig",
+      "4": "Ziemlich",
+      "5": "Sehr",
+      "6": "Vollkommen"
+    },
+    "convincing": {
+      "0": "Überhaupt nicht überzeugend",
+      "1": "Kaum überzeugend",
+      "2": "Etwas überzeugend",
+      "3": "Mäßig überzeugend",
+      "4": "Ziemlich überzeugend",
+      "5": "Sehr überzeugend",
+      "6": "Vollkommen überzeugend"
     }
   }
 }

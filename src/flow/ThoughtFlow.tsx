@@ -1,20 +1,30 @@
 import { useCallback, useState } from 'react';
 import { BackHandler, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
+import { useHeaderHeight } from 'expo-router/react-navigation';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../components/Button';
 import { spacing, useColors } from '../theme';
-import { CompleteStep, EvidenceStep, InitialBeliefStep, PatternsStep, ReevaluationStep, ThoughtStep } from './steps';
+import {
+  AlternativeStep,
+  CompleteStep,
+  EvidenceStep,
+  InitialBeliefStep,
+  PatternsStep,
+  RerateStep,
+  ThoughtStep,
+} from './steps';
 import { useThoughtDraft } from './useThoughtDraft';
 
-const TOTAL_STEPS = 5;
-type Step = 1 | 2 | 3 | 4 | 5 | 'complete';
+const TOTAL_STEPS = 6;
+type StepNumber = 1 | 2 | 3 | 4 | 5 | 6;
+type Step = StepNumber | 'complete';
 
-function clampStep(step: number | undefined): 1 | 2 | 3 | 4 | 5 {
+function clampStep(step: number | undefined): StepNumber {
   if (!step || step < 1) return 1;
-  return Math.min(Math.round(step), TOTAL_STEPS) as 1 | 2 | 3 | 4 | 5;
+  return Math.min(Math.round(step), TOTAL_STEPS) as StepNumber;
 }
 
 interface Props {
@@ -28,11 +38,12 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
   const { t } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
+  const headerHeight = useHeaderHeight();
   const { draft, update, flush } = useThoughtDraft(thoughtId);
   const [step, setStep] = useState<Step>(() => clampStep(initialStep ?? draft?.currentStep));
 
   const goTo = useCallback(
-    (next: 1 | 2 | 3 | 4 | 5) => {
+    (next: StepNumber) => {
       setStep(next);
       update((d) => ({ currentStep: next, status: next >= 3 && d.status === 'saved' ? 'in_progress' : d.status }));
     },
@@ -44,7 +55,7 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
     useCallback(() => {
       const sub = BackHandler.addEventListener('hardwareBackPress', () => {
         if (typeof step === 'number' && step > 1) {
-          goTo((step - 1) as 1 | 2 | 3 | 4);
+          goTo((step - 1) as StepNumber);
           return true;
         }
         return false;
@@ -55,7 +66,7 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
 
   if (!draft) {
     return (
-      <View style={[styles.screen, styles.center, { backgroundColor: colors.background }]}>
+      <View style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
         <Text style={{ color: colors.text }}>{t('detail.notFound')}</Text>
       </View>
     );
@@ -77,18 +88,16 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
   };
 
   const finish = () => {
-    update((d) => ({ status: 'challenged', finalBelief: d.finalBelief ?? d.initialBelief, currentStep: 5 }));
+    update((d) => ({ status: 'challenged', finalBelief: d.finalBelief ?? d.initialBelief, currentStep: TOTAL_STEPS }));
     flush();
     setStep('complete');
   };
 
   if (step === 'complete') {
     return (
-      <CompleteStep
-        before={draft.initialBelief}
-        after={draft.finalBelief ?? draft.initialBelief}
-        onDone={() => router.dismissTo('/')}
-      />
+      <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+        <CompleteStep draft={draft} onDone={() => router.dismissTo('/')} />
+      </View>
     );
   }
 
@@ -98,14 +107,14 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
     2: <InitialBeliefStep draft={draft} update={update} />,
     3: <EvidenceStep draft={draft} update={update} />,
     4: <PatternsStep draft={draft} update={update} />,
-    5: <ReevaluationStep draft={draft} update={update} />,
+    5: <AlternativeStep draft={draft} update={update} />,
+    6: <RerateStep draft={draft} update={update} />,
   }[step];
 
   return (
     <KeyboardAvoidingView
-      style={[styles.screen, { backgroundColor: colors.background }]}
+      style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
       <View style={styles.progressRow} accessible accessibilityRole="progressbar">
         <Text style={[styles.progressText, { color: colors.textMuted }]}>
@@ -117,7 +126,12 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
           />
         </View>
       </View>
-      <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        style={styles.flex}
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="interactive"
+      >
         {stepContent}
         {step === 2 && (
           // The step 2 decision lives in the content so both choices get full width.
@@ -132,16 +146,16 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
           <Button
             title={t('common.back')}
             variant="secondary"
-            onPress={() => goTo((step - 1) as 1 | 2 | 3 | 4)}
+            onPress={() => goTo((step - 1) as StepNumber)}
             style={step === 2 ? styles.flex : styles.backButton}
           />
         )}
-        {step === 5 ? (
-          <Button title={t('flow.step5.finish')} onPress={finish} style={styles.flex} />
+        {step === TOTAL_STEPS ? (
+          <Button title={t('flow.step6.finish')} onPress={finish} style={styles.flex} />
         ) : step !== 2 ? (
           <Button
             title={t('common.next')}
-            onPress={() => goTo((step + 1) as 2 | 3 | 4 | 5)}
+            onPress={() => goTo((step + 1) as StepNumber)}
             disabled={step === 1 && !hasText}
             style={styles.flex}
           />

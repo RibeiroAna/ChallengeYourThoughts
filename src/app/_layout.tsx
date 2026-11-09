@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as Notifications from 'expo-notifications';
@@ -53,7 +53,15 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={theme}>
       <StatusBar style="auto" />
-      <Stack screenOptions={{ headerShadowVisible: false, headerBackButtonDisplayMode: 'minimal' }}>
+      <Stack
+        screenOptions={{
+          headerShadowVisible: false,
+          headerBackButtonDisplayMode: 'minimal',
+          // A solid header background makes content sit under the header on every iOS version
+          // (iOS 26 otherwise lays it out under the bar). Screens add the header height as top padding.
+          headerBackground: () => <View style={{ flex: 1, backgroundColor: colors.background }} />,
+        }}
+      >
         <Stack.Screen name="index" options={{ title: t('home.title') }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="settings" options={{ title: t('settings.title') }} />

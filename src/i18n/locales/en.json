@@ -36,8 +36,8 @@
     },
     "step2": {
       "title": "How much do you believe this thought right now?",
-      "save": "Save",
-      "saveAndChallenge": "Save & challenge"
+      "save": "Save it for later",
+      "saveAndChallenge": "Challenge this thought now"
     },
     "step3": {
       "title": "Look at the evidence",
@@ -47,14 +47,13 @@
       "addFor": "Add evidence for",
       "addAgainst": "Add evidence against",
       "placeholder": "Write a piece of evidence",
-      "weight": "How convincing: {{value}}%",
+      "weight": "How convincing is this?",
       "remove": "Remove evidence",
-      "balanceLabel": "Balance of evidence",
-      "balanceFor": "For: {{value}}",
-      "balanceAgainst": "Against: {{value}}"
+      "done": "Done with this evidence",
+      "edit": "Edit evidence"
     },
     "step4": {
-      "title": "Any thinking patterns?",
+      "title": "Do you perceive some of these thinking patterns in your thought?",
       "hint": "Tap a pattern to read more. Select the ones that fit, or none.",
       "example": "Example",
       "select": "Select",
@@ -63,7 +62,10 @@
     "step5": {
       "title": "A more balanced view",
       "alternativeLabel": "Alternative thought",
-      "alternativePlaceholder": "What would be a more balanced way to see this?",
+      "alternativePlaceholder": "What would be a more balanced way to see this?"
+    },
+    "step6": {
+      "title": "How much do you believe it now?",
       "rerate": "How much do you believe the original thought now?",
       "alternativeBelief": "How much do you believe the alternative thought? (optional)",
       "rateAlternative": "Rate it",
@@ -93,7 +95,10 @@
     "editChallenge": "Edit",
     "deleteTitle": "Delete this thought?",
     "deleteBody": "This can't be undone.",
-    "notFound": "This thought no longer exists."
+    "notFound": "This thought no longer exists.",
+    "download": "Download as Markdown",
+    "status": "Status",
+    "exportError": "The file couldn't be shared. Please try again."
   },
   "patterns": {
     "all_or_nothing": {
@@ -221,6 +226,31 @@
       "body": "There's no account. Everything you write stays on this device and is never sent anywhere.",
       "disclaimer": "This app supports CBT practice. It does not replace a therapist or professional help.",
       "crisis": "If you are in crisis or thinking about harming yourself, please contact your local emergency services or a crisis line right away."
+    }
+  },
+  "balance": {
+    "label": "Balance of evidence",
+    "for": "For: {{value}}",
+    "against": "Against: {{value}}"
+  },
+  "scale": {
+    "belief": {
+      "0": "Not at all",
+      "1": "A little",
+      "2": "Somewhat",
+      "3": "Moderately",
+      "4": "Quite a lot",
+      "5": "Very much",
+      "6": "Completely"
+    },
+    "convincing": {
+      "0": "Not convincing at all",
+      "1": "Slightly convincing",
+      "2": "Somewhat convincing",
+      "3": "Moderately convincing",
+      "4": "Quite convincing",
+      "5": "Very convincing",
+      "6": "Completely convincing"
     }
   }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
+import { useHeaderHeight } from 'expo-router/react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,7 @@ const LANGUAGE_OPTIONS: LanguageSetting[] = ['system', ...SUPPORTED_LANGUAGES];
 export default function SettingsScreen() {
   const { t } = useTranslation();
   const colors = useColors();
+  const headerHeight = useHeaderHeight();
   const [language, setLanguage] = useState<LanguageSetting>(getLanguageSetting);
 
   const chooseLanguage = async (setting: LanguageSetting) => {
@@ -49,7 +51,10 @@ export default function SettingsScreen() {
   );
 
   return (
-    <ScrollView style={{ backgroundColor: colors.background }} contentContainerStyle={styles.content}>
+    <ScrollView
+      style={{ backgroundColor: colors.background }}
+      contentContainerStyle={[styles.content, { paddingTop: headerHeight + spacing.md }]}
+    >
       {sectionTitle(t('settings.language'))}
       <View style={[styles.group, { backgroundColor: colors.surface, borderColor: colors.border }]}>
         {LANGUAGE_OPTIONS.map((option, index) => {

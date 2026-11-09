@@ -38,6 +38,8 @@ export function DictationInput({ value, onChangeText, label, minHeight = 96, sty
         <TextInput
           accessibilityLabel={label}
           multiline
+          // Grow with the text instead of scrolling inside, so dragging on the field scrolls the page.
+          scrollEnabled={false}
           value={value}
           onChangeText={onChangeText}
           placeholderTextColor={colors.textMuted}
