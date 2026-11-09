@@ -4,7 +4,7 @@ import type { TFunction } from 'i18next';
 
 import { evidenceTotal } from '../components/EvidenceBalance';
 import { scaleBand } from '../components/BeliefSlider';
-import type { EvidenceSide, ThoughtWithDetails } from '../db/thoughts';
+import type { EffectSide, EvidenceSide, ThoughtWithDetails } from '../db/thoughts';
 
 /** Builds a Markdown document of one thought, in the current UI language. */
 export function thoughtToMarkdown(thought: ThoughtWithDetails, t: TFunction, language: string): string {
@@ -40,6 +40,15 @@ export function thoughtToMarkdown(thought: ThoughtWithDetails, t: TFunction, lan
   };
 
   if (thought.status !== 'saved' && thought.currentStep >= 3) {
+    const effects = (side: EffectSide, heading: string) => {
+      const items = thought.effects.filter((e) => e.side === side && e.text.trim());
+      lines.push('', `## ${heading}`, '');
+      if (items.length === 0) lines.push(t('detail.none'));
+      for (const e of items) lines.push(`- ${e.text.trim()}`);
+    };
+    effects('positive', t('detail.positive'));
+    effects('negative', t('detail.negative'));
+
     evidence('for', t('detail.evidenceFor'));
     evidence('against', t('detail.evidenceAgainst'));
     const forTotal = evidenceTotal(thought.evidence, 'for');

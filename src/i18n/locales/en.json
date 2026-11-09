@@ -40,6 +40,18 @@
       "saveAndChallenge": "Challenge this thought now"
     },
     "step3": {
+      "title": "What does this thought bring you?",
+      "hint": "Even a painful thought can have a positive side, like protecting or motivating you. What does it give you, and what does it cost you?",
+      "positive": "Positive sides",
+      "negative": "Negative sides",
+      "addPositive": "Add a positive side",
+      "addNegative": "Add a negative side",
+      "placeholder": "Write what this thought brings you",
+      "remove": "Remove",
+      "done": "Done with this item",
+      "edit": "Edit"
+    },
+    "step4": {
       "title": "Look at the evidence",
       "hint": "What supports the thought, and what doesn't? Rate how convincing each point is.",
       "for": "Evidence for",
@@ -52,19 +64,23 @@
       "done": "Done with this evidence",
       "edit": "Edit evidence"
     },
-    "step4": {
+    "step5": {
       "title": "Do you perceive some of these thinking patterns in your thought?",
       "hint": "Tap a pattern to read more. Select the ones that fit, or none.",
       "example": "Example",
       "select": "Select",
       "selected": "Selected"
     },
-    "step5": {
+    "step6": {
+      "title": "Everything so far",
+      "hint": "Take a moment to read what you've written before looking for a more balanced view."
+    },
+    "step7": {
       "title": "A more balanced view",
       "alternativeLabel": "Alternative thought",
       "alternativePlaceholder": "What would be a more balanced way to see this?"
     },
-    "step6": {
+    "step8": {
       "title": "How much do you believe it now?",
       "rerate": "How much do you believe the original thought now?",
       "alternativeBelief": "How much do you believe the alternative thought? (optional)",
@@ -85,6 +101,8 @@
     "finalBelief": "Belief after challenge",
     "alternative": "Alternative thought",
     "alternativeBelief": "Belief in alternative",
+    "positive": "Positive sides",
+    "negative": "Negative sides",
     "evidenceFor": "Evidence for",
     "evidenceAgainst": "Evidence against",
     "patterns": "Thinking patterns",

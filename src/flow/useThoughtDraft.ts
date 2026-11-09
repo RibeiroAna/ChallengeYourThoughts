@@ -25,6 +25,7 @@ function emptyDraft(): ThoughtWithDetails {
     alternativeBelief: null,
     currentStep: 1,
     evidence: [],
+    effects: [],
     patterns: [],
   };
 }

@@ -7,14 +7,13 @@ import { useTranslation } from 'react-i18next';
 
 import { useScaleLabel } from '../../../components/BeliefSlider';
 import { Button } from '../../../components/Button';
-import { EvidenceBalance } from '../../../components/EvidenceBalance';
 import { StatusBadge } from '../../../components/StatusBadge';
+import { ThoughtSummary } from '../../../components/ThoughtSummary';
 import { useHeaderInset } from '../../../components/useHeaderInset';
 import {
   deleteThought,
   getThought,
   saveThought,
-  type EvidenceSide,
   type ThoughtWithDetails,
 } from '../../../db/thoughts';
 import { shareThoughtAsMarkdown } from '../../../export/markdown';
@@ -80,32 +79,6 @@ export default function ThoughtDetailScreen() {
     </View>
   );
 
-  const evidenceList = (side: EvidenceSide) => {
-    const items = thought.evidence.filter((e) => e.side === side && e.text.trim());
-    return (
-      <View style={styles.block}>
-        <Text style={[styles.label, { color: colors.textMuted }]}>
-          {t(side === 'for' ? 'detail.evidenceFor' : 'detail.evidenceAgainst')}
-        </Text>
-        {items.length === 0 ? (
-          <Text style={[styles.value, { color: colors.text }]}>{t('detail.none')}</Text>
-        ) : (
-          items.map((e) => (
-            <View key={e.key} style={styles.evidenceRow}>
-              <Text style={[styles.value, styles.flex, { color: colors.text }]}>• {e.text}</Text>
-              <Text style={[styles.value, { color: side === 'for' ? colors.evidenceFor : colors.evidenceAgainst }]}>
-                {e.weight}%
-              </Text>
-              <Text style={[styles.label, styles.weightLabel, { color: colors.textMuted }]}>
-                {scaleLabel('convincing', e.weight, 1)}
-              </Text>
-            </View>
-          ))
-        )}
-      </View>
-    );
-  };
-
   const reachedChallenge = thought.status !== 'saved' && thought.currentStep >= 3;
   const date = new Date(thought.createdAt).toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short' });
 
@@ -139,17 +112,7 @@ export default function ThoughtDetailScreen() {
         {row(t('detail.initialBelief'), beliefText(thought.initialBelief))}
         {reachedChallenge && (
           <>
-            {evidenceList('for')}
-            {evidenceList('against')}
-            {thought.status === 'challenged' && <EvidenceBalance evidence={thought.evidence} />}
-            <View style={styles.block}>
-              <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.patterns')}</Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {thought.patterns.length
-                  ? thought.patterns.map((p) => t(`patterns.${p}.name`)).join(', ')
-                  : t('detail.none')}
-              </Text>
-            </View>
+            <ThoughtSummary thought={thought} showBalance={thought.status === 'challenged'} />
             {thought.alternativeThought ? row(t('detail.alternative'), thought.alternativeThought) : null}
             {thought.finalBelief != null && row(t('detail.finalBelief'), beliefText(thought.finalBelief))}
             {thought.alternativeBelief != null &&
@@ -185,11 +148,8 @@ const styles = StyleSheet.create({
   quote: { borderLeftWidth: 4, borderRadius: radius.sm, padding: spacing.md },
   quoteText: { fontSize: 18, lineHeight: 26 },
   row: { gap: 2 },
-  block: { gap: spacing.xs },
   label: { fontSize: 14 },
   value: { fontSize: 16, lineHeight: 22 },
-  evidenceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
-  weightLabel: { width: '100%', paddingLeft: spacing.md, marginTop: -spacing.xs },
   actions: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, gap: spacing.sm },
   actionRow: { flexDirection: 'row', gap: spacing.sm },
 });

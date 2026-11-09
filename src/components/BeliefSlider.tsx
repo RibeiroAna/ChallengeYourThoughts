@@ -21,6 +21,8 @@ export function useScaleLabel() {
 
 interface Props {
   label: string;
+  /** Hide the label visually when the screen already asks the question; screen readers still announce it. */
+  hideLabel?: boolean;
   value: number;
   onChange: (value: number) => void;
   scale: SliderScale;
@@ -28,12 +30,12 @@ interface Props {
   max?: number;
 }
 
-export function BeliefSlider({ label, value, onChange, scale, min = 0, max = 100 }: Props) {
+export function BeliefSlider({ label, hideLabel, value, onChange, scale, min = 0, max = 100 }: Props) {
   const colors = useColors();
   const scaleLabel = useScaleLabel()(scale, value, min);
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, { color: colors.text }]}>{label}</Text>
+      {!hideLabel && <Text style={[styles.label, { color: colors.text }]}>{label}</Text>}
       <View style={styles.valueRow}>
         <Text style={[styles.scale, { color: colors.primary }]}>{scaleLabel}</Text>
         <Text style={[styles.value, { color: colors.primary }]}>{value}%</Text>

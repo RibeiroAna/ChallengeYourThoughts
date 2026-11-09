@@ -14,6 +14,8 @@ const light = {
   primarySoft: '#E1ECE5',
   evidenceFor: '#B5654A',
   evidenceAgainst: '#4A7DB5',
+  effectPositive: '#4F7D66',
+  effectNegative: '#8A5A83',
   danger: '#B3261E',
 };
 
@@ -28,6 +30,8 @@ const dark: typeof light = {
   primarySoft: '#2A3A31',
   evidenceFor: '#E09A7F',
   evidenceAgainst: '#8FB6E3',
+  effectPositive: '#86B79D',
+  effectNegative: '#D3A6CC',
   danger: '#F2B8B5',
 };
 

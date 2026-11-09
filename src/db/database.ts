@@ -43,6 +43,18 @@ const MIGRATIONS: string[] = [
     value TEXT NOT NULL
   );
   `,
+  // v2: positive and negative sides of a thought, as step 3; steps 3–6 became 4, 5, 7 and 8.
+  `
+  CREATE TABLE effects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thoughtId INTEGER NOT NULL REFERENCES thoughts(id) ON DELETE CASCADE,
+    side TEXT NOT NULL CHECK (side IN ('positive', 'negative')),
+    text TEXT NOT NULL DEFAULT '',
+    "order" INTEGER NOT NULL DEFAULT 0
+  );
+  CREATE INDEX effects_thought ON effects(thoughtId);
+  UPDATE thoughts SET currentStep = CASE currentStep WHEN 3 THEN 4 WHEN 4 THEN 5 WHEN 5 THEN 7 WHEN 6 THEN 8 ELSE currentStep END;
+  `,
 ];
 
 /** Opens the local database and applies pending migrations. Synchronous so settings are ready before first render. */
@@ -68,7 +80,7 @@ export function deleteAllData() {
   const database = getDb();
   database.withTransactionSync(() => {
     database.execSync(
-      'DELETE FROM thought_patterns; DELETE FROM evidence; DELETE FROM thoughts; DELETE FROM reminders; DELETE FROM settings;',
+      'DELETE FROM thought_patterns; DELETE FROM effects; DELETE FROM evidence; DELETE FROM thoughts; DELETE FROM reminders; DELETE FROM settings;',
     );
   });
   database.execSync('VACUUM; PRAGMA wal_checkpoint(TRUNCATE);');

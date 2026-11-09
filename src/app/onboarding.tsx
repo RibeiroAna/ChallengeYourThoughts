@@ -10,7 +10,7 @@ import { setOnboardingDone } from '../db/settings';
 import { radius, spacing, useColors } from '../theme';
 
 const PAGES: { key: 'page1' | 'page2' | 'page3'; mascot: MascotVariant }[] = [
-  { key: 'page1', mascot: 'wave' },
+  { key: 'page1', mascot: 'stretch' },
   { key: 'page2', mascot: 'laptop' },
   { key: 'page3', mascot: 'idle' },
 ];
@@ -37,7 +37,7 @@ export default function OnboardingScreen() {
         {!last && <Button title={t('onboarding.skip')} variant="ghost" onPress={finish} />}
       </View>
       <ScrollView contentContainerStyle={styles.content}>
-        <Mascot key={page.mascot} variant={page.mascot} size={page.mascot === 'wave' ? 260 : 200} />
+        <Mascot key={page.mascot} variant={page.mascot} size={200} />
         <Text accessibilityRole="header" style={[styles.title, { color: colors.text }]}>
           {t(`onboarding.${page.key}.title`)}
         </Text>

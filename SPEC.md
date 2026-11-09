@@ -23,7 +23,7 @@ Status: pre-implementation. Items marked **[Decision needed]** are not settled y
 
 ## 2. Thought-challenge flow
 
-Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it for later** (stop here) or **Challenge this thought now** (continue to Steps 3–6). A thought that was only saved can be challenged later from the thought list.
+Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it for later** (stop here) or **Challenge this thought now** (continue to Steps 3–8). A thought that was only saved can be challenged later from the thought list.
 
 ### Step 1 — Capture the thought
 - Free-text input.
@@ -34,14 +34,18 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it
 - Slider from 0–100%, with a verbal scale next to the percentage (e.g. "Not at all" … "Completely").
 - Actions: **Save it for later** | **Challenge this thought now**.
 
-### Step 3 — Evidence
+### Step 3 — Positive and negative sides
+- "What does this thought bring you?" Even a painful thought can have positive sides (e.g. it protects or motivates), as well as negative ones.
+- Two lists: **Positive sides** and **Negative sides**. Same look and behaviour as Step 4 (add, edit, remove, check button to close an item, text or dictation), but **no weight slider**.
+
+### Step 4 — Evidence
 - Two lists: **Evidence for** the thought and **Evidence against** it.
 - The user can add, edit, and remove any number of items in each list. Text or dictation.
 - Each item gets a **weight** (how strong/convincing that evidence is), as a slider from 1–100%, with a verbal scale (e.g. "Not convincing at all" … "Completely convincing").
 - A check button closes an item once it's written; tapping a closed item reopens it for editing.
 - The visual balance of total weight "for" vs "against" is shown only once the challenge is finished (completion screen and thought page), not while collecting evidence.
 
-### Step 4 — Thinking patterns (cognitive distortions)
+### Step 5 — Thinking patterns (cognitive distortions)
 - Prompt: "Do you perceive some of these thinking patterns in your thought?"
 - Multi-select list. Each pattern has a short explanation and an example, shown on tap.
 - Initial set:
@@ -59,10 +63,14 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it
   - Personalisation / blame
 - Selecting none is allowed.
 
-### Step 5 — Alternative thought
+### Step 6 — Summary
+- Read-only overview of everything so far, before writing the alternative thought: the thought, initial belief, positive and negative sides, evidence for/against (with weights), and selected patterns.
+- The evidence balance bar is not shown here (see Step 4).
+
+### Step 7 — Alternative thought
 - Write an **alternative (balanced) thought** (text or dictation).
 
-### Step 6 — Re-rating
+### Step 8 — Re-rating
 - On its own page.
 - Re-rate belief in the **original thought** (same scale as Step 2).
 - Optional: rate belief in the alternative thought.
@@ -113,7 +121,7 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it
 - **Videos have an opaque off-white background (`#FDFDFD`).** Screens that show a sloth video must use that exact colour behind it, or place the video inside a `#FDFDFD` rounded card. This also applies in dark mode. The still `sloth-sitting.webp` is transparent and works on any background.
 - Videos play muted, with no controls, and must not interrupt the user's own audio.
 - When the OS "reduce motion" setting is on, show `sloth-sitting.webp` instead of videos.
-- Suggested placement: wave → onboarding/welcome; idle → empty states; laptop → writing steps; stretch → challenge complete.
+- Placement: stretch → onboarding/welcome; laptop → onboarding; idle → empty states; wave → challenge complete. No mascot on the flow steps.
 
 ### Onboarding
 - A short intro (2–3 screens) explaining what a thought challenge is, with the sloth.

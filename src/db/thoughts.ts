@@ -2,6 +2,7 @@ import { getDb } from './database';
 
 export type ThoughtStatus = 'saved' | 'in_progress' | 'challenged';
 export type EvidenceSide = 'for' | 'against';
+export type EffectSide = 'positive' | 'negative';
 
 export interface Evidence {
   /** Local key for list rendering; database ids are reassigned on every save. */
@@ -9,6 +10,14 @@ export interface Evidence {
   side: EvidenceSide;
   text: string;
   weight: number;
+}
+
+/** Something positive or negative the thought brings to the user. */
+export interface Effect {
+  /** Local key for list rendering; database ids are reassigned on every save. */
+  key: string;
+  side: EffectSide;
+  text: string;
 }
 
 export interface Thought {
@@ -26,6 +35,7 @@ export interface Thought {
 
 export interface ThoughtWithDetails extends Thought {
   evidence: Evidence[];
+  effects: Effect[];
   patterns: string[];
 }
 
@@ -52,10 +62,16 @@ export function getThought(id: number): ThoughtWithDetails | null {
       id,
     )
     .map((e) => ({ key: `db${e.id}`, side: e.side, text: e.text, weight: e.weight }));
+  const effects = db
+    .getAllSync<{ id: number; side: EffectSide; text: string }>(
+      'SELECT id, side, text FROM effects WHERE thoughtId = ? ORDER BY "order", id',
+      id,
+    )
+    .map((e) => ({ key: `db${e.id}`, side: e.side, text: e.text }));
   const patterns = db
     .getAllSync<{ patternId: string }>('SELECT patternId FROM thought_patterns WHERE thoughtId = ?', id)
     .map((p) => p.patternId);
-  return { ...thought, evidence, patterns };
+  return { ...thought, evidence, effects, patterns };
 }
 
 export function createThought(text: string, initialBelief = DEFAULT_BELIEF): number {
@@ -72,7 +88,7 @@ export function createThought(text: string, initialBelief = DEFAULT_BELIEF): num
   return result.lastInsertRowId;
 }
 
-/** Writes the whole thought, replacing its evidence and patterns. */
+/** Writes the whole thought, replacing its evidence, effects and patterns. */
 export function saveThought(thought: ThoughtWithDetails) {
   const db = getDb();
   const now = new Date().toISOString();
@@ -98,6 +114,16 @@ export function saveThought(thought: ThoughtWithDetails) {
         e.side,
         e.text,
         e.weight,
+        index,
+      );
+    });
+    db.runSync('DELETE FROM effects WHERE thoughtId = ?', thought.id);
+    thought.effects.forEach((e, index) => {
+      db.runSync(
+        'INSERT INTO effects (thoughtId, side, text, "order") VALUES (?, ?, ?, ?)',
+        thought.id,
+        e.side,
+        e.text,
         index,
       );
     });

@@ -40,6 +40,18 @@
       "saveAndChallenge": "Desafiar este pensamento agora"
     },
     "step3": {
+      "title": "O que este pensamento traz para você?",
+      "hint": "Até um pensamento doloroso pode ter um lado positivo, como proteger ou motivar você. O que ele te dá e o que ele te custa?",
+      "positive": "Lados positivos",
+      "negative": "Lados negativos",
+      "addPositive": "Adicionar um lado positivo",
+      "addNegative": "Adicionar um lado negativo",
+      "placeholder": "Escreva o que este pensamento traz para você",
+      "remove": "Remover",
+      "done": "Concluir este item",
+      "edit": "Editar"
+    },
+    "step4": {
       "title": "Olhe para as evidências",
       "hint": "O que apoia o pensamento e o que não apoia? Avalie o quanto cada ponto convence.",
       "for": "Evidências a favor",
@@ -52,19 +64,23 @@
       "done": "Concluir esta evidência",
       "edit": "Editar evidência"
     },
-    "step4": {
+    "step5": {
       "title": "Você percebe alguns desses padrões de pensamento no seu pensamento?",
       "hint": "Toque em um padrão para ler mais. Selecione os que se encaixam, ou nenhum.",
       "example": "Exemplo",
       "select": "Selecionar",
       "selected": "Selecionado"
     },
-    "step5": {
+    "step6": {
+      "title": "Tudo até agora",
+      "hint": "Reserve um momento para ler o que você escreveu antes de buscar uma visão mais equilibrada."
+    },
+    "step7": {
       "title": "Um olhar mais equilibrado",
       "alternativeLabel": "Pensamento alternativo",
       "alternativePlaceholder": "Qual seria uma forma mais equilibrada de ver isso?"
     },
-    "step6": {
+    "step8": {
       "title": "Quanto você acredita nele agora?",
       "rerate": "Quanto você acredita no pensamento original agora?",
       "alternativeBelief": "Quanto você acredita no pensamento alternativo? (opcional)",
@@ -85,6 +101,8 @@
     "finalBelief": "Crença depois do desafio",
     "alternative": "Pensamento alternativo",
     "alternativeBelief": "Crença na alternativa",
+    "positive": "Lados positivos",
+    "negative": "Lados negativos",
     "evidenceFor": "Evidências a favor",
     "evidenceAgainst": "Evidências contra",
     "patterns": "Padrões de pensamento",

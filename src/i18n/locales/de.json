@@ -40,6 +40,18 @@
       "saveAndChallenge": "Diesen Gedanken jetzt hinterfragen"
     },
     "step3": {
+      "title": "Was bringt dir dieser Gedanke?",
+      "hint": "Auch ein schmerzhafter Gedanke kann eine positive Seite haben, zum Beispiel, dass er dich schützt oder antreibt. Was gibt er dir, und was kostet er dich?",
+      "positive": "Positive Seiten",
+      "negative": "Negative Seiten",
+      "addPositive": "Positive Seite hinzufügen",
+      "addNegative": "Negative Seite hinzufügen",
+      "placeholder": "Schreib auf, was dir dieser Gedanke bringt",
+      "remove": "Entfernen",
+      "done": "Punkt fertig",
+      "edit": "Bearbeiten"
+    },
+    "step4": {
       "title": "Schau dir die Belege an",
       "hint": "Was spricht für den Gedanken, was dagegen? Bewerte, wie überzeugend jeder Punkt ist.",
       "for": "Was dafür spricht",
@@ -52,19 +64,23 @@
       "done": "Beleg fertig",
       "edit": "Beleg bearbeiten"
     },
-    "step4": {
+    "step5": {
       "title": "Erkennst du einige dieser Denkmuster in deinem Gedanken?",
       "hint": "Tippe auf ein Muster, um mehr zu lesen. Wähle die passenden aus – oder keins.",
       "example": "Beispiel",
       "select": "Auswählen",
       "selected": "Ausgewählt"
     },
-    "step5": {
+    "step6": {
+      "title": "Alles bisher",
+      "hint": "Nimm dir einen Moment, um zu lesen, was du geschrieben hast, bevor du nach einer ausgewogeneren Sichtweise suchst."
+    },
+    "step7": {
       "title": "Ein ausgewogenerer Blick",
       "alternativeLabel": "Alternativer Gedanke",
       "alternativePlaceholder": "Wie könnte man das ausgewogener sehen?"
     },
-    "step6": {
+    "step8": {
       "title": "Wie sehr glaubst du es jetzt?",
       "rerate": "Wie sehr glaubst du den ursprünglichen Gedanken jetzt?",
       "alternativeBelief": "Wie sehr glaubst du den alternativen Gedanken? (optional)",
@@ -85,6 +101,8 @@
     "finalBelief": "Glaube nach dem Hinterfragen",
     "alternative": "Alternativer Gedanke",
     "alternativeBelief": "Glaube an die Alternative",
+    "positive": "Positive Seiten",
+    "negative": "Negative Seiten",
     "evidenceFor": "Was dafür spricht",
     "evidenceAgainst": "Was dagegen spricht",
     "patterns": "Denkmuster",

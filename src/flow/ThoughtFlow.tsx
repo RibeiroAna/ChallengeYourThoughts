@@ -10,16 +10,18 @@ import { spacing, useColors } from '../theme';
 import {
   AlternativeStep,
   CompleteStep,
+  EffectsStep,
   EvidenceStep,
   InitialBeliefStep,
   PatternsStep,
   RerateStep,
+  SummaryStep,
   ThoughtStep,
 } from './steps';
 import { useThoughtDraft } from './useThoughtDraft';
 
-const TOTAL_STEPS = 6;
-type StepNumber = 1 | 2 | 3 | 4 | 5 | 6;
+const TOTAL_STEPS = 8;
+type StepNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type Step = StepNumber | 'complete';
 
 function clampStep(step: number | undefined): StepNumber {
@@ -111,10 +113,12 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
   const stepContent = {
     1: <ThoughtStep draft={draft} update={update} />,
     2: <InitialBeliefStep draft={draft} update={update} />,
-    3: <EvidenceStep draft={draft} update={update} />,
-    4: <PatternsStep draft={draft} update={update} />,
-    5: <AlternativeStep draft={draft} update={update} />,
-    6: <RerateStep draft={draft} update={update} />,
+    3: <EffectsStep draft={draft} update={update} />,
+    4: <EvidenceStep draft={draft} update={update} />,
+    5: <PatternsStep draft={draft} update={update} />,
+    6: <SummaryStep draft={draft} />,
+    7: <AlternativeStep draft={draft} update={update} />,
+    8: <RerateStep draft={draft} update={update} />,
   }[step];
 
   return (
@@ -161,7 +165,7 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
             />
           )}
           {step === TOTAL_STEPS ? (
-            <Button title={t('flow.step6.finish')} onPress={finish} style={styles.flex} />
+            <Button title={t('flow.step8.finish')} onPress={finish} style={styles.flex} />
           ) : step !== 2 ? (
             <Button
               title={t('common.next')}
