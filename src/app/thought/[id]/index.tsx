@@ -1,0 +1,152 @@
+import { useCallback, useState } from 'react';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
+
+import { Button } from '../../../components/Button';
+import { StatusBadge } from '../../../components/StatusBadge';
+import {
+  deleteThought,
+  getThought,
+  saveThought,
+  type EvidenceSide,
+  type ThoughtWithDetails,
+} from '../../../db/thoughts';
+import { radius, spacing, useColors } from '../../../theme';
+
+export default function ThoughtDetailScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { t, i18n } = useTranslation();
+  const colors = useColors();
+  const insets = useSafeAreaInsets();
+  const [thought, setThought] = useState<ThoughtWithDetails | null | undefined>(undefined);
+
+  useFocusEffect(
+    useCallback(() => {
+      setThought(getThought(Number(id)));
+    }, [id]),
+  );
+
+  if (thought === undefined) return null;
+  if (thought === null) {
+    return (
+      <View style={[styles.screen, styles.center, { backgroundColor: colors.background }]}>
+        <Text style={{ color: colors.text }}>{t('detail.notFound')}</Text>
+      </View>
+    );
+  }
+
+  const openFlow = (step: number) =>
+    router.push({ pathname: '/thought/[id]/challenge', params: { id: String(thought.id), step: String(step) } });
+
+  const startChallenge = () => {
+    saveThought({ ...thought, status: 'in_progress', currentStep: 3 });
+    openFlow(3);
+  };
+
+  const confirmDelete = () =>
+    Alert.alert(t('detail.deleteTitle'), t('detail.deleteBody'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('common.delete'),
+        style: 'destructive',
+        onPress: () => {
+          deleteThought(thought.id);
+          router.back();
+        },
+      },
+    ]);
+
+  const row = (label: string, value: string) => (
+    <View style={styles.row}>
+      <Text style={[styles.label, { color: colors.textMuted }]}>{label}</Text>
+      <Text style={[styles.value, { color: colors.text }]}>{value}</Text>
+    </View>
+  );
+
+  const evidenceList = (side: EvidenceSide) => {
+    const items = thought.evidence.filter((e) => e.side === side && e.text.trim());
+    return (
+      <View style={styles.block}>
+        <Text style={[styles.label, { color: colors.textMuted }]}>
+          {t(side === 'for' ? 'detail.evidenceFor' : 'detail.evidenceAgainst')}
+        </Text>
+        {items.length === 0 ? (
+          <Text style={[styles.value, { color: colors.text }]}>{t('detail.none')}</Text>
+        ) : (
+          items.map((e) => (
+            <View key={e.key} style={styles.evidenceRow}>
+              <Text style={[styles.value, styles.flex, { color: colors.text }]}>• {e.text}</Text>
+              <Text style={[styles.value, { color: side === 'for' ? colors.evidenceFor : colors.evidenceAgainst }]}>
+                {e.weight}%
+              </Text>
+            </View>
+          ))
+        )}
+      </View>
+    );
+  };
+
+  const reachedChallenge = thought.status !== 'saved' && thought.currentStep >= 3;
+  const date = new Date(thought.createdAt).toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short' });
+
+  return (
+    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={styles.metaRow}>
+          <StatusBadge status={thought.status} />
+          <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.createdAt', { date })}</Text>
+        </View>
+        <View style={[styles.quote, { borderLeftColor: colors.primary, backgroundColor: colors.surface }]}>
+          <Text style={[styles.quoteText, { color: colors.text }]}>{thought.text}</Text>
+        </View>
+        {row(t('detail.initialBelief'), `${thought.initialBelief}%`)}
+        {reachedChallenge && (
+          <>
+            {evidenceList('for')}
+            {evidenceList('against')}
+            <View style={styles.block}>
+              <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.patterns')}</Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {thought.patterns.length
+                  ? thought.patterns.map((p) => t(`patterns.${p}.name`)).join(', ')
+                  : t('detail.none')}
+              </Text>
+            </View>
+            {thought.alternativeThought ? row(t('detail.alternative'), thought.alternativeThought) : null}
+            {thought.finalBelief != null && row(t('detail.finalBelief'), `${thought.finalBelief}%`)}
+            {thought.alternativeBelief != null && row(t('detail.alternativeBelief'), `${thought.alternativeBelief}%`)}
+          </>
+        )}
+      </ScrollView>
+      <View style={[styles.actions, { paddingBottom: insets.bottom + spacing.md }]}>
+        {thought.status === 'saved' && <Button title={t('detail.startChallenge')} onPress={startChallenge} />}
+        {thought.status === 'in_progress' && (
+          <Button title={t('detail.continueChallenge')} onPress={() => openFlow(thought.currentStep)} />
+        )}
+        <View style={styles.actionRow}>
+          <Button title={t('detail.editChallenge')} variant="secondary" onPress={() => openFlow(1)} style={styles.flex} />
+          <Button title={t('common.delete')} variant="danger" onPress={confirmDelete} style={styles.flex} />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  screen: { flex: 1 },
+  center: { alignItems: 'center', justifyContent: 'center' },
+  flex: { flex: 1 },
+  content: { padding: spacing.md, gap: spacing.md },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, flexWrap: 'wrap' },
+  quote: { borderLeftWidth: 4, borderRadius: radius.sm, padding: spacing.md },
+  quoteText: { fontSize: 18, lineHeight: 26 },
+  row: { gap: 2 },
+  block: { gap: spacing.xs },
+  label: { fontSize: 14 },
+  value: { fontSize: 16, lineHeight: 22 },
+  evidenceRow: { flexDirection: 'row', gap: spacing.sm },
+  actions: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, gap: spacing.sm },
+  actionRow: { flexDirection: 'row', gap: spacing.sm },
+});

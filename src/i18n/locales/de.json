@@ -1,0 +1,226 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "done": "Fertig",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "close": "Schließen"
+  },
+  "status": {
+    "saved": "Gespeichert",
+    "in_progress": "In Arbeit",
+    "challenged": "Hinterfragt"
+  },
+  "home": {
+    "title": "Meine Gedanken",
+    "newThought": "Neuer Gedanke",
+    "settings": "Einstellungen",
+    "emptyTitle": "Noch keine Gedanken",
+    "emptyBody": "Wenn dich ein Gedanke beschäftigt, schreib ihn hier auf. Wir schauen ihn uns gemeinsam an, ganz in Ruhe.",
+    "untitled": "(leerer Gedanke)",
+    "belief": "{{value}} %",
+    "beliefChange": "{{before}} % → {{after}} %"
+  },
+  "flow": {
+    "newTitle": "Neuer Gedanke",
+    "challengeTitle": "Hinterfragen",
+    "stepOf": "Schritt {{current}} von {{total}}",
+    "step1": {
+      "title": "Was ist der Gedanke?",
+      "hint": "Schreib ihn so auf, wie er in deinem Kopf klingt.",
+      "placeholder": "z. B. „Ich werde die Präsentation vermasseln.“"
+    },
+    "step2": {
+      "title": "Wie sehr glaubst du diesen Gedanken gerade?",
+      "save": "Speichern",
+      "saveAndChallenge": "Speichern & hinterfragen"
+    },
+    "step3": {
+      "title": "Schau dir die Belege an",
+      "hint": "Was spricht für den Gedanken, was dagegen? Bewerte, wie überzeugend jeder Punkt ist.",
+      "for": "Was dafür spricht",
+      "against": "Was dagegen spricht",
+      "addFor": "Beleg dafür hinzufügen",
+      "addAgainst": "Beleg dagegen hinzufügen",
+      "placeholder": "Schreib einen Beleg auf",
+      "weight": "Wie überzeugend: {{value}} %",
+      "remove": "Beleg entfernen",
+      "balanceLabel": "Verhältnis der Belege",
+      "balanceFor": "Dafür: {{value}}",
+      "balanceAgainst": "Dagegen: {{value}}"
+    },
+    "step4": {
+      "title": "Erkennst du Denkmuster?",
+      "hint": "Tippe auf ein Muster, um mehr zu lesen. Wähle die passenden aus – oder keins.",
+      "example": "Beispiel",
+      "select": "Auswählen",
+      "selected": "Ausgewählt"
+    },
+    "step5": {
+      "title": "Ein ausgewogenerer Blick",
+      "alternativeLabel": "Alternativer Gedanke",
+      "alternativePlaceholder": "Wie könnte man das ausgewogener sehen?",
+      "rerate": "Wie sehr glaubst du den ursprünglichen Gedanken jetzt?",
+      "alternativeBelief": "Wie sehr glaubst du den alternativen Gedanken? (optional)",
+      "rateAlternative": "Bewerten",
+      "skipAlternative": "Überspringen",
+      "change": "Glaube an den ursprünglichen Gedanken: {{before}} % → {{after}} %",
+      "finish": "Abschließen"
+    },
+    "complete": {
+      "title": "Gut gemacht",
+      "body": "Du hast dir die Zeit genommen, diesen Gedanken aus einem anderen Blickwinkel zu betrachten. Das ist echte Übung.",
+      "backHome": "Zurück zu meinen Gedanken"
+    }
+  },
+  "detail": {
+    "title": "Gedanke",
+    "initialBelief": "Glaube am Anfang",
+    "finalBelief": "Glaube nach dem Hinterfragen",
+    "alternative": "Alternativer Gedanke",
+    "alternativeBelief": "Glaube an die Alternative",
+    "evidenceFor": "Was dafür spricht",
+    "evidenceAgainst": "Was dagegen spricht",
+    "patterns": "Denkmuster",
+    "none": "Keine",
+    "createdAt": "Geschrieben am {{date}}",
+    "startChallenge": "Diesen Gedanken hinterfragen",
+    "continueChallenge": "Hinterfragen fortsetzen",
+    "editChallenge": "Bearbeiten",
+    "deleteTitle": "Diesen Gedanken löschen?",
+    "deleteBody": "Das kann nicht rückgängig gemacht werden.",
+    "notFound": "Diesen Gedanken gibt es nicht mehr."
+  },
+  "patterns": {
+    "all_or_nothing": {
+      "name": "Schwarz-Weiß-Denken",
+      "description": "Dinge nur in Extremen sehen, ohne Zwischentöne.",
+      "example": "„Wenn es nicht perfekt ist, ist es ein totaler Reinfall.“"
+    },
+    "overgeneralisation": {
+      "name": "Übergeneralisierung",
+      "description": "Ein einzelnes Ereignis als Beweis für ein endloses Muster nehmen.",
+      "example": "„Wieder eine Absage. Das passiert mir immer.“"
+    },
+    "mental_filter": {
+      "name": "Mentaler Filter",
+      "description": "Sich auf ein negatives Detail konzentrieren und alles andere ausblenden.",
+      "example": "„Jemand hat während meines Vortrags die Stirn gerunzelt, also lief es schlecht.“"
+    },
+    "disqualifying_positive": {
+      "name": "Positives abwerten",
+      "description": "Gute Dinge abtun, als würden sie nicht zählen.",
+      "example": "„Die haben das nur gesagt, um nett zu sein.“"
+    },
+    "mind_reading": {
+      "name": "Gedankenlesen",
+      "description": "Annehmen, zu wissen, was andere denken – ohne echte Belege.",
+      "example": "„Sie hat nicht geantwortet, also ist sie bestimmt sauer auf mich.“"
+    },
+    "fortune_telling": {
+      "name": "Wahrsagen",
+      "description": "Vorhersagen, dass etwas schlecht ausgeht, als wäre es eine Tatsache.",
+      "example": "„Ich weiß einfach, dass das Vorstellungsgespräch schiefgeht.“"
+    },
+    "catastrophising": {
+      "name": "Katastrophisieren",
+      "description": "Das schlimmstmögliche Ergebnis erwarten.",
+      "example": "„Wenn ich einen Fehler mache, verliere ich meinen Job und alles bricht zusammen.“"
+    },
+    "magnification_minimisation": {
+      "name": "Übertreiben / Herunterspielen",
+      "description": "Negatives aufblähen und Positives kleinreden.",
+      "example": "„Mein Fehler war riesig, mein Erfolg nur Glück.“"
+    },
+    "emotional_reasoning": {
+      "name": "Emotionale Beweisführung",
+      "description": "Etwas für wahr halten, weil es sich wahr anfühlt.",
+      "example": "„Ich fühle mich nutzlos, also bin ich nutzlos.“"
+    },
+    "should_statements": {
+      "name": "„Sollte“-Sätze",
+      "description": "Starre Regeln darüber, wie du oder andere sein sollten oder müssten.",
+      "example": "„Ich sollte nie Angst haben.“"
+    },
+    "labelling": {
+      "name": "Etikettieren",
+      "description": "Dir oder anderen ein festes, pauschales Etikett geben.",
+      "example": "„Ich bin so ein Idiot.“"
+    },
+    "personalisation_blame": {
+      "name": "Personalisieren / Schuldzuweisung",
+      "description": "Die ganze Verantwortung übernehmen – oder sie komplett jemand anderem geben.",
+      "example": "„Die Party war langweilig, weil ich da war.“"
+    }
+  },
+  "dictation": {
+    "start": "Diktieren starten",
+    "stop": "Diktieren beenden",
+    "listening": "Ich höre zu …",
+    "error": "Das Diktieren wurde beendet. Du kannst einfach weitertippen."
+  },
+  "reminders": {
+    "title": "Erinnerungen",
+    "empty": "Noch keine Erinnerungen. Eine sanfte Erinnerung kann dir helfen, eine Gewohnheit aufzubauen.",
+    "add": "Erinnerung hinzufügen",
+    "time": "Uhrzeit",
+    "weekdays": "Tage",
+    "enabled": "An",
+    "delete": "Erinnerung löschen",
+    "permissionDenied": "Mitteilungen sind für diese App ausgeschaltet. Du kannst sie in den Geräteeinstellungen erlauben.",
+    "noDays": "Wähle mindestens einen Tag.",
+    "notificationTitle": "Ein Moment für dich?",
+    "notificationBody": "Wenn dich ein Gedanke beschäftigt, kannst du ihn jetzt aufschreiben. Ganz ohne Druck.",
+    "channelName": "Erinnerungen"
+  },
+  "weekdays": {
+    "1": "So",
+    "2": "Mo",
+    "3": "Di",
+    "4": "Mi",
+    "5": "Do",
+    "6": "Fr",
+    "7": "Sa"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "languageSystem": "Gerätesprache",
+    "reminders": "Erinnerungen",
+    "data": "Daten",
+    "privacyNote": "Alles, was du schreibst, wird nur auf diesem Gerät gespeichert.",
+    "deleteAll": "Alle Daten löschen",
+    "deleteAllTitle": "Alle Daten löschen?",
+    "deleteAllBody": "Alle Gedanken und Erinnerungen werden dauerhaft von diesem Gerät gelöscht. Das kann nicht rückgängig gemacht werden.",
+    "deleteAllConfirm": "Alles löschen",
+    "about": "Info",
+    "disclaimer": "Einführung erneut anzeigen"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "pt-BR": "Português (Brasil)"
+  },
+  "onboarding": {
+    "skip": "Überspringen",
+    "start": "Los geht's",
+    "page1": {
+      "title": "Hallo! Ich helfe dir, einen Gang runterzuschalten",
+      "body": "Manche Gedanken tauchen automatisch auf und fühlen sich sehr wahr an. Diese App hilft dir, sie aufzuschreiben und genauer anzuschauen."
+    },
+    "page2": {
+      "title": "So funktioniert das Hinterfragen",
+      "body": "Schreib den Gedanken auf, bewerte, wie sehr du ihn glaubst, sammle Belege dafür und dagegen, erkenne Denkmuster und finde einen ausgewogeneren Blick."
+    },
+    "page3": {
+      "title": "Privat und auf deinem Gerät",
+      "body": "Es gibt kein Konto. Alles, was du schreibst, bleibt auf diesem Gerät und wird nirgendwohin gesendet.",
+      "disclaimer": "Diese App unterstützt dich beim Üben von KVT. Sie ersetzt keine Therapie und keine professionelle Hilfe.",
+      "crisis": "Wenn du in einer Krise bist oder daran denkst, dir etwas anzutun, wende dich bitte sofort an den örtlichen Notruf oder eine Krisenhotline."
+    }
+  }
+}

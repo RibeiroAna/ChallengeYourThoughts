@@ -1,0 +1,226 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close"
+  },
+  "status": {
+    "saved": "Saved",
+    "in_progress": "In progress",
+    "challenged": "Challenged"
+  },
+  "home": {
+    "title": "My thoughts",
+    "newThought": "New thought",
+    "settings": "Settings",
+    "emptyTitle": "No thoughts yet",
+    "emptyBody": "When a thought bothers you, write it down here. We can look at it together, slowly.",
+    "untitled": "(empty thought)",
+    "belief": "{{value}}%",
+    "beliefChange": "{{before}}% → {{after}}%"
+  },
+  "flow": {
+    "newTitle": "New thought",
+    "challengeTitle": "Challenge",
+    "stepOf": "Step {{current}} of {{total}}",
+    "step1": {
+      "title": "What's the thought?",
+      "hint": "Write it down the way it sounds in your head.",
+      "placeholder": "e.g. \"I'm going to mess up the presentation.\""
+    },
+    "step2": {
+      "title": "How much do you believe this thought right now?",
+      "save": "Save",
+      "saveAndChallenge": "Save & challenge"
+    },
+    "step3": {
+      "title": "Look at the evidence",
+      "hint": "What supports the thought, and what doesn't? Rate how convincing each point is.",
+      "for": "Evidence for",
+      "against": "Evidence against",
+      "addFor": "Add evidence for",
+      "addAgainst": "Add evidence against",
+      "placeholder": "Write a piece of evidence",
+      "weight": "How convincing: {{value}}%",
+      "remove": "Remove evidence",
+      "balanceLabel": "Balance of evidence",
+      "balanceFor": "For: {{value}}",
+      "balanceAgainst": "Against: {{value}}"
+    },
+    "step4": {
+      "title": "Any thinking patterns?",
+      "hint": "Tap a pattern to read more. Select the ones that fit, or none.",
+      "example": "Example",
+      "select": "Select",
+      "selected": "Selected"
+    },
+    "step5": {
+      "title": "A more balanced view",
+      "alternativeLabel": "Alternative thought",
+      "alternativePlaceholder": "What would be a more balanced way to see this?",
+      "rerate": "How much do you believe the original thought now?",
+      "alternativeBelief": "How much do you believe the alternative thought? (optional)",
+      "rateAlternative": "Rate it",
+      "skipAlternative": "Skip",
+      "change": "Belief in the original thought: {{before}}% → {{after}}%",
+      "finish": "Finish"
+    },
+    "complete": {
+      "title": "Well done",
+      "body": "You took the time to look at this thought from a different angle. That's real practice.",
+      "backHome": "Back to my thoughts"
+    }
+  },
+  "detail": {
+    "title": "Thought",
+    "initialBelief": "Belief at first",
+    "finalBelief": "Belief after challenge",
+    "alternative": "Alternative thought",
+    "alternativeBelief": "Belief in alternative",
+    "evidenceFor": "Evidence for",
+    "evidenceAgainst": "Evidence against",
+    "patterns": "Thinking patterns",
+    "none": "None",
+    "createdAt": "Written on {{date}}",
+    "startChallenge": "Challenge this thought",
+    "continueChallenge": "Continue challenge",
+    "editChallenge": "Edit",
+    "deleteTitle": "Delete this thought?",
+    "deleteBody": "This can't be undone.",
+    "notFound": "This thought no longer exists."
+  },
+  "patterns": {
+    "all_or_nothing": {
+      "name": "All-or-nothing thinking",
+      "description": "Seeing things in black and white, with no middle ground.",
+      "example": "\"If it isn't perfect, it's a total failure.\""
+    },
+    "overgeneralisation": {
+      "name": "Overgeneralisation",
+      "description": "Taking one event as proof of a never-ending pattern.",
+      "example": "\"I got rejected again. This always happens to me.\""
+    },
+    "mental_filter": {
+      "name": "Mental filter",
+      "description": "Focusing on one negative detail and ignoring everything else.",
+      "example": "\"Someone frowned during my talk, so it went badly.\""
+    },
+    "disqualifying_positive": {
+      "name": "Disqualifying the positive",
+      "description": "Dismissing good things as if they don't count.",
+      "example": "\"They only said it was good to be nice.\""
+    },
+    "mind_reading": {
+      "name": "Mind reading",
+      "description": "Assuming you know what others think, without real evidence.",
+      "example": "\"She didn't reply, so she must be annoyed with me.\""
+    },
+    "fortune_telling": {
+      "name": "Fortune telling",
+      "description": "Predicting that things will turn out badly, as if it were a fact.",
+      "example": "\"I just know the interview will go wrong.\""
+    },
+    "catastrophising": {
+      "name": "Catastrophising",
+      "description": "Expecting the worst possible outcome.",
+      "example": "\"If I make a mistake, I'll lose my job and everything will fall apart.\""
+    },
+    "magnification_minimisation": {
+      "name": "Magnification / minimisation",
+      "description": "Blowing up the negatives and shrinking the positives.",
+      "example": "\"My mistake was huge; my success was just luck.\""
+    },
+    "emotional_reasoning": {
+      "name": "Emotional reasoning",
+      "description": "Believing something is true because it feels true.",
+      "example": "\"I feel useless, so I must be useless.\""
+    },
+    "should_statements": {
+      "name": "\"Should\" statements",
+      "description": "Rigid rules about how you or others should, must or ought to be.",
+      "example": "\"I should never feel anxious.\""
+    },
+    "labelling": {
+      "name": "Labelling",
+      "description": "Attaching a fixed, global label to yourself or others.",
+      "example": "\"I'm such an idiot.\""
+    },
+    "personalisation_blame": {
+      "name": "Personalisation / blame",
+      "description": "Taking all the responsibility, or putting it all on someone else.",
+      "example": "\"The party was boring because of me.\""
+    }
+  },
+  "dictation": {
+    "start": "Start dictation",
+    "stop": "Stop dictation",
+    "listening": "Listening…",
+    "error": "Dictation stopped. You can keep typing."
+  },
+  "reminders": {
+    "title": "Reminders",
+    "empty": "No reminders yet. A gentle reminder can help you build the habit.",
+    "add": "Add reminder",
+    "time": "Time",
+    "weekdays": "Days",
+    "enabled": "On",
+    "delete": "Delete reminder",
+    "permissionDenied": "Notifications are turned off for this app. You can allow them in your device settings.",
+    "noDays": "Choose at least one day.",
+    "notificationTitle": "A moment for yourself?",
+    "notificationBody": "If a thought is on your mind, you can write it down now. No pressure.",
+    "channelName": "Reminders"
+  },
+  "weekdays": {
+    "1": "Sun",
+    "2": "Mon",
+    "3": "Tue",
+    "4": "Wed",
+    "5": "Thu",
+    "6": "Fri",
+    "7": "Sat"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageSystem": "Device language",
+    "reminders": "Reminders",
+    "data": "Data",
+    "privacyNote": "Everything you write is stored only on this device.",
+    "deleteAll": "Delete all data",
+    "deleteAllTitle": "Delete all data?",
+    "deleteAllBody": "All thoughts and reminders will be permanently deleted from this device. This can't be undone.",
+    "deleteAllConfirm": "Delete everything",
+    "about": "About",
+    "disclaimer": "Show the introduction again"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "pt-BR": "Português (Brasil)"
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "start": "Let's start",
+    "page1": {
+      "title": "Hi, I'm here to help you slow down",
+      "body": "Some thoughts pop up automatically and feel very true. This app helps you write them down and look at them more closely."
+    },
+    "page2": {
+      "title": "How a thought challenge works",
+      "body": "Write the thought, rate how much you believe it, look at the evidence for and against, spot thinking patterns, and find a more balanced view."
+    },
+    "page3": {
+      "title": "Private and on your device",
+      "body": "There's no account. Everything you write stays on this device and is never sent anywhere.",
+      "disclaimer": "This app supports CBT practice. It does not replace a therapist or professional help.",
+      "crisis": "If you are in crisis or thinking about harming yourself, please contact your local emergency services or a crisis line right away."
+    }
+  }
+}

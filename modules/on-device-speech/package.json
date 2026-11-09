@@ -1,0 +1,8 @@
+{
+  "name": "on-device-speech",
+  "version": "1.0.0",
+  "description": "Checks whether speech recognition for a locale can run fully on-device",
+  "main": "index.ts",
+  "license": "UNLICENSED",
+  "private": true
+}

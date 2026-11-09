@@ -1,0 +1,226 @@
+{
+  "common": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "back": "Voltar",
+    "next": "Próximo",
+    "done": "Concluído",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "close": "Fechar"
+  },
+  "status": {
+    "saved": "Salvo",
+    "in_progress": "Em andamento",
+    "challenged": "Desafiado"
+  },
+  "home": {
+    "title": "Meus pensamentos",
+    "newThought": "Novo pensamento",
+    "settings": "Configurações",
+    "emptyTitle": "Nenhum pensamento ainda",
+    "emptyBody": "Quando um pensamento incomodar você, escreva aqui. Podemos olhar para ele juntos, com calma.",
+    "untitled": "(pensamento vazio)",
+    "belief": "{{value}}%",
+    "beliefChange": "{{before}}% → {{after}}%"
+  },
+  "flow": {
+    "newTitle": "Novo pensamento",
+    "challengeTitle": "Desafiar",
+    "stepOf": "Passo {{current}} de {{total}}",
+    "step1": {
+      "title": "Qual é o pensamento?",
+      "hint": "Escreva do jeito que ele soa na sua cabeça.",
+      "placeholder": "ex.: \"Vou estragar a apresentação.\""
+    },
+    "step2": {
+      "title": "Quanto você acredita nesse pensamento agora?",
+      "save": "Salvar",
+      "saveAndChallenge": "Salvar e desafiar"
+    },
+    "step3": {
+      "title": "Olhe para as evidências",
+      "hint": "O que apoia o pensamento e o que não apoia? Avalie o quanto cada ponto convence.",
+      "for": "Evidências a favor",
+      "against": "Evidências contra",
+      "addFor": "Adicionar evidência a favor",
+      "addAgainst": "Adicionar evidência contra",
+      "placeholder": "Escreva uma evidência",
+      "weight": "Quanto convence: {{value}}%",
+      "remove": "Remover evidência",
+      "balanceLabel": "Equilíbrio das evidências",
+      "balanceFor": "A favor: {{value}}",
+      "balanceAgainst": "Contra: {{value}}"
+    },
+    "step4": {
+      "title": "Algum padrão de pensamento?",
+      "hint": "Toque em um padrão para ler mais. Selecione os que se encaixam, ou nenhum.",
+      "example": "Exemplo",
+      "select": "Selecionar",
+      "selected": "Selecionado"
+    },
+    "step5": {
+      "title": "Um olhar mais equilibrado",
+      "alternativeLabel": "Pensamento alternativo",
+      "alternativePlaceholder": "Qual seria uma forma mais equilibrada de ver isso?",
+      "rerate": "Quanto você acredita no pensamento original agora?",
+      "alternativeBelief": "Quanto você acredita no pensamento alternativo? (opcional)",
+      "rateAlternative": "Avaliar",
+      "skipAlternative": "Pular",
+      "change": "Crença no pensamento original: {{before}}% → {{after}}%",
+      "finish": "Concluir"
+    },
+    "complete": {
+      "title": "Muito bem",
+      "body": "Você tirou um tempo para olhar esse pensamento por outro ângulo. Isso é prática de verdade.",
+      "backHome": "Voltar aos meus pensamentos"
+    }
+  },
+  "detail": {
+    "title": "Pensamento",
+    "initialBelief": "Crença no início",
+    "finalBelief": "Crença depois do desafio",
+    "alternative": "Pensamento alternativo",
+    "alternativeBelief": "Crença na alternativa",
+    "evidenceFor": "Evidências a favor",
+    "evidenceAgainst": "Evidências contra",
+    "patterns": "Padrões de pensamento",
+    "none": "Nenhum",
+    "createdAt": "Escrito em {{date}}",
+    "startChallenge": "Desafiar este pensamento",
+    "continueChallenge": "Continuar desafio",
+    "editChallenge": "Editar",
+    "deleteTitle": "Excluir este pensamento?",
+    "deleteBody": "Isso não pode ser desfeito.",
+    "notFound": "Este pensamento não existe mais."
+  },
+  "patterns": {
+    "all_or_nothing": {
+      "name": "Pensamento tudo ou nada",
+      "description": "Ver as coisas em preto e branco, sem meio-termo.",
+      "example": "\"Se não ficar perfeito, é um fracasso total.\""
+    },
+    "overgeneralisation": {
+      "name": "Supergeneralização",
+      "description": "Tomar um único acontecimento como prova de um padrão sem fim.",
+      "example": "\"Fui rejeitado de novo. Isso sempre acontece comigo.\""
+    },
+    "mental_filter": {
+      "name": "Filtro mental",
+      "description": "Focar em um detalhe negativo e ignorar todo o resto.",
+      "example": "\"Alguém franziu a testa na minha fala, então foi ruim.\""
+    },
+    "disqualifying_positive": {
+      "name": "Desqualificar o positivo",
+      "description": "Descartar coisas boas como se não contassem.",
+      "example": "\"Só disseram que foi bom para serem gentis.\""
+    },
+    "mind_reading": {
+      "name": "Leitura mental",
+      "description": "Supor que sabe o que os outros pensam, sem evidências reais.",
+      "example": "\"Ela não respondeu, então deve estar chateada comigo.\""
+    },
+    "fortune_telling": {
+      "name": "Adivinhação do futuro",
+      "description": "Prever que as coisas vão dar errado, como se fosse um fato.",
+      "example": "\"Eu sei que a entrevista vai dar errado.\""
+    },
+    "catastrophising": {
+      "name": "Catastrofização",
+      "description": "Esperar o pior resultado possível.",
+      "example": "\"Se eu errar, vou perder o emprego e tudo vai desmoronar.\""
+    },
+    "magnification_minimisation": {
+      "name": "Magnificação / minimização",
+      "description": "Aumentar o negativo e diminuir o positivo.",
+      "example": "\"Meu erro foi enorme; meu sucesso foi só sorte.\""
+    },
+    "emotional_reasoning": {
+      "name": "Raciocínio emocional",
+      "description": "Acreditar que algo é verdade porque parece verdade.",
+      "example": "\"Eu me sinto inútil, então eu sou inútil.\""
+    },
+    "should_statements": {
+      "name": "Afirmações do tipo \"deveria\"",
+      "description": "Regras rígidas sobre como você ou os outros deveriam ou precisariam ser.",
+      "example": "\"Eu nunca deveria sentir ansiedade.\""
+    },
+    "labelling": {
+      "name": "Rotulação",
+      "description": "Colocar um rótulo fixo e global em si mesmo ou nos outros.",
+      "example": "\"Eu sou um idiota.\""
+    },
+    "personalisation_blame": {
+      "name": "Personalização / culpa",
+      "description": "Assumir toda a responsabilidade, ou colocá-la toda em outra pessoa.",
+      "example": "\"A festa foi chata por minha causa.\""
+    }
+  },
+  "dictation": {
+    "start": "Iniciar ditado",
+    "stop": "Parar ditado",
+    "listening": "Ouvindo…",
+    "error": "O ditado parou. Você pode continuar digitando."
+  },
+  "reminders": {
+    "title": "Lembretes",
+    "empty": "Nenhum lembrete ainda. Um lembrete gentil pode ajudar a criar o hábito.",
+    "add": "Adicionar lembrete",
+    "time": "Horário",
+    "weekdays": "Dias",
+    "enabled": "Ativo",
+    "delete": "Excluir lembrete",
+    "permissionDenied": "As notificações estão desativadas para este app. Você pode permiti-las nas configurações do aparelho.",
+    "noDays": "Escolha pelo menos um dia.",
+    "notificationTitle": "Um momento para você?",
+    "notificationBody": "Se algum pensamento estiver na sua cabeça, você pode anotá-lo agora. Sem pressão.",
+    "channelName": "Lembretes"
+  },
+  "weekdays": {
+    "1": "Dom",
+    "2": "Seg",
+    "3": "Ter",
+    "4": "Qua",
+    "5": "Qui",
+    "6": "Sex",
+    "7": "Sáb"
+  },
+  "settings": {
+    "title": "Configurações",
+    "language": "Idioma",
+    "languageSystem": "Idioma do aparelho",
+    "reminders": "Lembretes",
+    "data": "Dados",
+    "privacyNote": "Tudo o que você escreve fica salvo apenas neste aparelho.",
+    "deleteAll": "Excluir todos os dados",
+    "deleteAllTitle": "Excluir todos os dados?",
+    "deleteAllBody": "Todos os pensamentos e lembretes serão excluídos permanentemente deste aparelho. Isso não pode ser desfeito.",
+    "deleteAllConfirm": "Excluir tudo",
+    "about": "Sobre",
+    "disclaimer": "Mostrar a introdução novamente"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "pt-BR": "Português (Brasil)"
+  },
+  "onboarding": {
+    "skip": "Pular",
+    "start": "Vamos começar",
+    "page1": {
+      "title": "Oi! Estou aqui para ajudar você a desacelerar",
+      "body": "Alguns pensamentos surgem automaticamente e parecem muito verdadeiros. Este app ajuda você a anotá-los e olhar para eles com mais atenção."
+    },
+    "page2": {
+      "title": "Como funciona um desafio de pensamento",
+      "body": "Escreva o pensamento, avalie o quanto acredita nele, veja as evidências a favor e contra, identifique padrões de pensamento e encontre um olhar mais equilibrado."
+    },
+    "page3": {
+      "title": "Privado e no seu aparelho",
+      "body": "Não há conta. Tudo o que você escreve fica neste aparelho e nunca é enviado a lugar nenhum.",
+      "disclaimer": "Este app apoia a prática da TCC. Ele não substitui um terapeuta nem ajuda profissional.",
+      "crisis": "Se você estiver em crise ou pensando em se machucar, procure imediatamente o serviço de emergência local ou uma linha de apoio emocional."
+    }
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "NSMicrophoneUsageDescription": "Erlaube Challenge Your Thoughts, das Mikrofon für Diktieren auf dem Gerät zu nutzen. Die Aufnahme verlässt dein Gerät nie.",
+  "NSSpeechRecognitionUsageDescription": "Erlaube Challenge Your Thoughts, deine Sprache auf diesem Gerät zu transkribieren. Nichts wird an einen Server gesendet."
+}
