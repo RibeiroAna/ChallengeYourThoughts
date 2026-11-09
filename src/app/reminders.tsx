@@ -3,10 +3,10 @@ import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 import { getCalendars } from 'expo-localization';
-import { useHeaderHeight } from 'expo-router/react-navigation';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../components/Button';
+import { useHeaderInset } from '../components/useHeaderInset';
 import { listReminders, type Reminder } from '../db/reminders';
 import { addReminder, ensurePermission, removeReminder, saveReminder } from '../notifications/reminders';
 import { radius, spacing, useColors } from '../theme';
@@ -136,7 +136,7 @@ function ReminderCard({
 export default function RemindersScreen() {
   const { t } = useTranslation();
   const colors = useColors();
-  const headerHeight = useHeaderHeight();
+  const inset = useHeaderInset();
   const [reminders, setReminders] = useState<Reminder[]>(() => listReminders());
   const [denied, setDenied] = useState(false);
 
@@ -159,26 +159,26 @@ export default function RemindersScreen() {
   };
 
   return (
-    <ScrollView
-      style={{ backgroundColor: colors.background }}
-      contentContainerStyle={[styles.content, { paddingTop: headerHeight + spacing.md }]}
-    >
-      {reminders.length === 0 && <Text style={[styles.empty, { color: colors.textMuted }]}>{t('reminders.empty')}</Text>}
-      {reminders.map((reminder) => (
-        <ReminderCard
-          key={reminder.id}
-          reminder={reminder}
-          onChange={change}
-          onDelete={() => remove(reminder)}
-        />
-      ))}
-      {denied && <Text style={[styles.empty, { color: colors.danger }]}>{t('reminders.permissionDenied')}</Text>}
-      <Button title={t('reminders.add')} variant="secondary" onPress={add} />
-    </ScrollView>
+    <View onLayout={inset.onLayout} style={[styles.root, { backgroundColor: colors.background }]}>
+      <ScrollView
+        style={{ backgroundColor: colors.background }}
+        contentContainerStyle={[styles.content, { paddingTop: inset.paddingTop + spacing.md }]}
+      >
+        {reminders.length === 0 && (
+          <Text style={[styles.empty, { color: colors.textMuted }]}>{t('reminders.empty')}</Text>
+        )}
+        {reminders.map((reminder) => (
+          <ReminderCard key={reminder.id} reminder={reminder} onChange={change} onDelete={() => remove(reminder)} />
+        ))}
+        {denied && <Text style={[styles.empty, { color: colors.danger }]}>{t('reminders.permissionDenied')}</Text>}
+        <Button title={t('reminders.add')} variant="secondary" onPress={add} />
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  root: { flex: 1 },
   content: { padding: spacing.md, gap: spacing.md },
   empty: { fontSize: 16, lineHeight: 22 },
   card: { borderWidth: 1, borderRadius: radius.md, padding: spacing.md, gap: spacing.sm },
@@ -187,6 +187,19 @@ const styles = StyleSheet.create({
   enabled: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   label: { fontSize: 14 },
   days: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
-  day: { minWidth: 42, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', paddingHorizontal: spacing.xs },
-  delete: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, alignSelf: 'flex-start', marginTop: spacing.xs },
+  day: {
+    minWidth: 42,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xs,
+  },
+  delete: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    alignSelf: 'flex-start',
+    marginTop: spacing.xs,
+  },
 });

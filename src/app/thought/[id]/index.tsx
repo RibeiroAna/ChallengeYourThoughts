@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Stack, router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useHeaderHeight } from 'expo-router/react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +9,7 @@ import { useScaleLabel } from '../../../components/BeliefSlider';
 import { Button } from '../../../components/Button';
 import { EvidenceBalance } from '../../../components/EvidenceBalance';
 import { StatusBadge } from '../../../components/StatusBadge';
+import { useHeaderInset } from '../../../components/useHeaderInset';
 import {
   deleteThought,
   getThought,
@@ -25,7 +25,7 @@ export default function ThoughtDetailScreen() {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const headerHeight = useHeaderHeight();
+  const inset = useHeaderInset();
   const scaleLabel = useScaleLabel();
   const [thought, setThought] = useState<ThoughtWithDetails | null | undefined>(undefined);
 
@@ -38,7 +38,10 @@ export default function ThoughtDetailScreen() {
   if (thought === undefined) return null;
   if (thought === null) {
     return (
-      <View style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+      <View
+        onLayout={inset.onLayout}
+        style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: inset.paddingTop }]}
+      >
         <Text style={{ color: colors.text }}>{t('detail.notFound')}</Text>
       </View>
     );
@@ -107,11 +110,19 @@ export default function ThoughtDetailScreen() {
   const date = new Date(thought.createdAt).toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short' });
 
   return (
-    <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+    <View
+      onLayout={inset.onLayout}
+      style={[styles.screen, { backgroundColor: colors.background, paddingTop: inset.paddingTop }]}
+    >
       <Stack.Screen
         options={{
           headerRight: () => (
-            <Pressable accessibilityRole="button" accessibilityLabel={t('detail.download')} onPress={download} hitSlop={12}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('detail.download')}
+              onPress={download}
+              hitSlop={12}
+            >
               <Ionicons name="download-outline" size={24} color={colors.text} />
             </Pressable>
           ),
@@ -141,7 +152,8 @@ export default function ThoughtDetailScreen() {
             </View>
             {thought.alternativeThought ? row(t('detail.alternative'), thought.alternativeThought) : null}
             {thought.finalBelief != null && row(t('detail.finalBelief'), beliefText(thought.finalBelief))}
-            {thought.alternativeBelief != null && row(t('detail.alternativeBelief'), beliefText(thought.alternativeBelief))}
+            {thought.alternativeBelief != null &&
+              row(t('detail.alternativeBelief'), beliefText(thought.alternativeBelief))}
           </>
         )}
       </ScrollView>
@@ -151,7 +163,12 @@ export default function ThoughtDetailScreen() {
           <Button title={t('detail.continueChallenge')} onPress={() => openFlow(thought.currentStep)} />
         )}
         <View style={styles.actionRow}>
-          <Button title={t('detail.editChallenge')} variant="secondary" onPress={() => openFlow(1)} style={styles.flex} />
+          <Button
+            title={t('detail.editChallenge')}
+            variant="secondary"
+            onPress={() => openFlow(1)}
+            style={styles.flex}
+          />
           <Button title={t('common.delete')} variant="danger" onPress={confirmDelete} style={styles.flex} />
         </View>
       </View>

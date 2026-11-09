@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { BackHandler, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
-import { useHeaderHeight } from 'expo-router/react-navigation';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../components/Button';
+import { useHeaderInset } from '../components/useHeaderInset';
 import { spacing, useColors } from '../theme';
 import {
   AlternativeStep,
@@ -38,7 +38,7 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
   const { t } = useTranslation();
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const headerHeight = useHeaderHeight();
+  const inset = useHeaderInset();
   const { draft, update, flush } = useThoughtDraft(thoughtId);
   const [step, setStep] = useState<Step>(() => clampStep(initialStep ?? draft?.currentStep));
 
@@ -66,7 +66,10 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
 
   if (!draft) {
     return (
-      <View style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+      <View
+        onLayout={inset.onLayout}
+        style={[styles.screen, styles.center, { backgroundColor: colors.background, paddingTop: inset.paddingTop }]}
+      >
         <Text style={{ color: colors.text }}>{t('detail.notFound')}</Text>
       </View>
     );
@@ -95,7 +98,10 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
 
   if (step === 'complete') {
     return (
-      <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}>
+      <View
+        onLayout={inset.onLayout}
+        style={[styles.screen, { backgroundColor: colors.background, paddingTop: inset.paddingTop }]}
+      >
         <CompleteStep draft={draft} onDone={() => router.dismissTo('/')} />
       </View>
     );
@@ -112,56 +118,61 @@ export function ThoughtFlow({ thoughtId, initialStep }: Props) {
   }[step];
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.screen, { backgroundColor: colors.background, paddingTop: headerHeight }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    <View
+      onLayout={inset.onLayout}
+      style={[styles.screen, { backgroundColor: colors.background, paddingTop: inset.paddingTop }]}
     >
-      <View style={styles.progressRow} accessible accessibilityRole="progressbar">
-        <Text style={[styles.progressText, { color: colors.textMuted }]}>
-          {t('flow.stepOf', { current: step, total: TOTAL_STEPS })}
-        </Text>
-        <View style={[styles.progressTrack, { backgroundColor: colors.border }]}>
-          <View
-            style={[styles.progressFill, { backgroundColor: colors.primary, width: `${(step / TOTAL_STEPS) * 100}%` }]}
-          />
-        </View>
-      </View>
-      <ScrollView
-        style={styles.flex}
-        contentContainerStyle={styles.content}
-        keyboardShouldPersistTaps="handled"
-        keyboardDismissMode="interactive"
-      >
-        {stepContent}
-        {step === 2 && (
-          // The step 2 decision lives in the content so both choices get full width.
-          <View style={styles.choice}>
-            <Button title={t('flow.step2.saveAndChallenge')} onPress={saveAndChallenge} />
-            <Button title={t('flow.step2.save')} variant="secondary" onPress={saveOnly} />
+      <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <View style={styles.progressRow} accessible accessibilityRole="progressbar">
+          <Text style={[styles.progressText, { color: colors.textMuted }]}>
+            {t('flow.stepOf', { current: step, total: TOTAL_STEPS })}
+          </Text>
+          <View style={[styles.progressTrack, { backgroundColor: colors.border }]}>
+            <View
+              style={[
+                styles.progressFill,
+                { backgroundColor: colors.primary, width: `${(step / TOTAL_STEPS) * 100}%` },
+              ]}
+            />
           </View>
-        )}
-      </ScrollView>
-      <View style={[styles.actions, { paddingBottom: insets.bottom + spacing.md, borderTopColor: colors.border }]}>
-        {step > 1 && (
-          <Button
-            title={t('common.back')}
-            variant="secondary"
-            onPress={() => goTo((step - 1) as StepNumber)}
-            style={step === 2 ? styles.flex : styles.backButton}
-          />
-        )}
-        {step === TOTAL_STEPS ? (
-          <Button title={t('flow.step6.finish')} onPress={finish} style={styles.flex} />
-        ) : step !== 2 ? (
-          <Button
-            title={t('common.next')}
-            onPress={() => goTo((step + 1) as StepNumber)}
-            disabled={step === 1 && !hasText}
-            style={styles.flex}
-          />
-        ) : null}
-      </View>
-    </KeyboardAvoidingView>
+        </View>
+        <ScrollView
+          style={styles.flex}
+          contentContainerStyle={styles.content}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="interactive"
+        >
+          {stepContent}
+          {step === 2 && (
+            // The step 2 decision lives in the content so both choices get full width.
+            <View style={styles.choice}>
+              <Button title={t('flow.step2.saveAndChallenge')} onPress={saveAndChallenge} />
+              <Button title={t('flow.step2.save')} variant="secondary" onPress={saveOnly} />
+            </View>
+          )}
+        </ScrollView>
+        <View style={[styles.actions, { paddingBottom: insets.bottom + spacing.md, borderTopColor: colors.border }]}>
+          {step > 1 && (
+            <Button
+              title={t('common.back')}
+              variant="secondary"
+              onPress={() => goTo((step - 1) as StepNumber)}
+              style={step === 2 ? styles.flex : styles.backButton}
+            />
+          )}
+          {step === TOTAL_STEPS ? (
+            <Button title={t('flow.step6.finish')} onPress={finish} style={styles.flex} />
+          ) : step !== 2 ? (
+            <Button
+              title={t('common.next')}
+              onPress={() => goTo((step + 1) as StepNumber)}
+              disabled={step === 1 && !hasText}
+              style={styles.flex}
+            />
+          ) : null}
+        </View>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 

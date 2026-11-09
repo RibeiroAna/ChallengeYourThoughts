@@ -57,9 +57,11 @@ export default function RootLayout() {
         screenOptions={{
           headerShadowVisible: false,
           headerBackButtonDisplayMode: 'minimal',
-          // A solid header background makes content sit under the header on every iOS version
-          // (iOS 26 otherwise lays it out under the bar). Screens add the header height as top padding.
+          // Screens measure how much the header overlaps them and pad by that (see useHeaderInset).
           headerBackground: () => <View style={{ flex: 1, backgroundColor: colors.background }} />,
+          // iOS 26 enables a full-screen swipe-back gesture by default, which competes with vertical
+          // scrolling. Swiping back from the screen edge still works.
+          fullScreenGestureEnabled: false,
         }}
       >
         <Stack.Screen name="index" options={{ title: t('home.title') }} />
