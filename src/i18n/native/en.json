@@ -1,4 +1,5 @@
 {
   "NSMicrophoneUsageDescription": "Allow Challenge Your Thoughts to use the microphone for on-device dictation. Audio never leaves your device.",
-  "NSSpeechRecognitionUsageDescription": "Allow Challenge Your Thoughts to transcribe your speech on this device. Nothing is sent to a server."
+  "NSSpeechRecognitionUsageDescription": "Allow Challenge Your Thoughts to transcribe your speech on this device. Nothing is sent to a server.",
+  "NSPhotoLibraryUsageDescription": "Challenge Your Thoughts does not access your photos. This text is required only because a built-in component could load images from your library."
 }

@@ -1,4 +1,5 @@
 {
   "NSMicrophoneUsageDescription": "Permita que o Challenge Your Thoughts use o microfone para ditado no próprio aparelho. O áudio nunca sai do seu aparelho.",
-  "NSSpeechRecognitionUsageDescription": "Permita que o Challenge Your Thoughts transcreva sua fala neste aparelho. Nada é enviado a um servidor."
+  "NSSpeechRecognitionUsageDescription": "Permita que o Challenge Your Thoughts transcreva sua fala neste aparelho. Nada é enviado a um servidor.",
+  "NSPhotoLibraryUsageDescription": "O Challenge Your Thoughts não acessa suas fotos. Este texto só é necessário porque um componente integrado poderia carregar imagens da sua biblioteca."
 }

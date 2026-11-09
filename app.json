@@ -11,7 +11,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.challengeyourthoughts.app",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSSpeechRecognitionUsageDescription": "Allow $(PRODUCT_NAME) to transcribe your speech on this device. Nothing is sent to a server.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to use the microphone for on-device dictation. Audio never leaves your device.",
+        "NSPhotoLibraryUsageDescription": "Challenge Your Thoughts does not access your photos. This text is required only because a built-in component could load images from your library."
       }
     },
     "android": {
@@ -20,7 +23,10 @@
         "backgroundColor": "#FDFDFD",
         "foregroundImage": "./assets/android-icon-foreground.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -65,6 +71,16 @@
       "en": "./src/i18n/native/en.json",
       "de": "./src/i18n/native/de.json",
       "pt-BR": "./src/i18n/native/pt-BR.json"
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "435d0eb4-8f83-40ae-9f94-b2baad3f45be"
+      }
     }
   }
 }
