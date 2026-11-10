@@ -48,3 +48,7 @@ npx expo lint
 - App lock and encryption at rest
 - Excluding the database from OS cloud backups
 - Region-specific crisis resources (onboarding uses generic wording for now)
+
+## License
+
+Challenge Your Thoughts is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. See [LICENSE](LICENSE).
