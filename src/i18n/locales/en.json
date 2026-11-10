@@ -89,6 +89,7 @@
       "title": "How much do you believe it now?",
       "rerate": "How much do you believe the original thought now?",
       "alternativeBelief": "How much do you believe the alternative thought? (optional)",
+      "beliefChange": "How much you believe the thought",
       "rateAlternative": "Rate it",
       "skipAlternative": "Skip",
       "change": "Belief in the original thought: {{before}}% → {{after}}%",

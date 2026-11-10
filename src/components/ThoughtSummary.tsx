@@ -165,6 +165,7 @@ export function ThoughtSummary({ thought, showBalance, showChallenge = true }: P
 
       {finalBelief != null && (
         <Card>
+          <SectionTitle title={t('detail.beliefChange')} color={colors.primary} />
           <View
             style={styles.change}
             accessible

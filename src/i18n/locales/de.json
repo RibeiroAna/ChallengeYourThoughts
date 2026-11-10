@@ -89,6 +89,7 @@
       "title": "Wie sehr glaubst du es jetzt?",
       "rerate": "Wie sehr glaubst du den ursprünglichen Gedanken jetzt?",
       "alternativeBelief": "Wie sehr glaubst du den alternativen Gedanken? (optional)",
+      "beliefChange": "Wie sehr du den Gedanken glaubst",
       "rateAlternative": "Bewerten",
       "skipAlternative": "Überspringen",
       "change": "Glaube an den ursprünglichen Gedanken: {{before}} % → {{after}} %",

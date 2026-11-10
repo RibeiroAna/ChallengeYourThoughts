@@ -89,6 +89,7 @@
       "title": "Quanto você acredita nele agora?",
       "rerate": "Quanto você acredita no pensamento original agora?",
       "alternativeBelief": "Quanto você acredita no pensamento alternativo? (opcional)",
+      "beliefChange": "Quanto você acredita no pensamento",
       "rateAlternative": "Avaliar",
       "skipAlternative": "Pular",
       "change": "Crença no pensamento original: {{before}}% → {{after}}%",
