@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
-import { useScaleLabel } from '../../../components/BeliefSlider';
 import { Button } from '../../../components/Button';
 import { StatusBadge } from '../../../components/StatusBadge';
 import { ThoughtSummary } from '../../../components/ThoughtSummary';
@@ -17,7 +16,7 @@ import {
   type ThoughtWithDetails,
 } from '../../../db/thoughts';
 import { shareThoughtAsMarkdown } from '../../../export/markdown';
-import { radius, spacing, useColors } from '../../../theme';
+import { spacing, useColors } from '../../../theme';
 
 export default function ThoughtDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -25,7 +24,6 @@ export default function ThoughtDetailScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const inset = useHeaderInset();
-  const scaleLabel = useScaleLabel();
   const [thought, setThought] = useState<ThoughtWithDetails | null | undefined>(undefined);
 
   useFocusEffect(
@@ -70,16 +68,6 @@ export default function ThoughtDetailScreen() {
   const download = () =>
     shareThoughtAsMarkdown(thought, t, i18n.language).catch(() => Alert.alert(t('detail.exportError')));
 
-  const beliefText = (value: number) => `${value}% · ${scaleLabel('belief', value)}`;
-
-  const row = (label: string, value: string) => (
-    <View style={styles.row}>
-      <Text style={[styles.label, { color: colors.textMuted }]}>{label}</Text>
-      <Text style={[styles.value, { color: colors.text }]}>{value}</Text>
-    </View>
-  );
-
-  const reachedChallenge = thought.status !== 'saved' && thought.currentStep >= 3;
   const date = new Date(thought.createdAt).toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short' });
 
   return (
@@ -106,19 +94,11 @@ export default function ThoughtDetailScreen() {
           <StatusBadge status={thought.status} />
           <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.createdAt', { date })}</Text>
         </View>
-        <View style={[styles.quote, { borderLeftColor: colors.primary, backgroundColor: colors.surface }]}>
-          <Text style={[styles.quoteText, { color: colors.text }]}>{thought.text}</Text>
-        </View>
-        {row(t('detail.initialBelief'), beliefText(thought.initialBelief))}
-        {reachedChallenge && (
-          <>
-            <ThoughtSummary thought={thought} showBalance={thought.status === 'challenged'} />
-            {thought.alternativeThought ? row(t('detail.alternative'), thought.alternativeThought) : null}
-            {thought.finalBelief != null && row(t('detail.finalBelief'), beliefText(thought.finalBelief))}
-            {thought.alternativeBelief != null &&
-              row(t('detail.alternativeBelief'), beliefText(thought.alternativeBelief))}
-          </>
-        )}
+        <ThoughtSummary
+          thought={thought}
+          showBalance={thought.status === 'challenged'}
+          showChallenge={thought.status !== 'saved' && thought.currentStep >= 3}
+        />
       </ScrollView>
       <View style={[styles.actions, { paddingBottom: insets.bottom + spacing.md }]}>
         {thought.status === 'saved' && <Button title={t('detail.startChallenge')} onPress={startChallenge} />}
@@ -145,11 +125,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   content: { padding: spacing.md, gap: spacing.md },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, flexWrap: 'wrap' },
-  quote: { borderLeftWidth: 4, borderRadius: radius.sm, padding: spacing.md },
-  quoteText: { fontSize: 18, lineHeight: 26 },
-  row: { gap: 2 },
   label: { fontSize: 14 },
-  value: { fontSize: 16, lineHeight: 22 },
   actions: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, gap: spacing.sm },
   actionRow: { flexDirection: 'row', gap: spacing.sm },
 });

@@ -417,18 +417,9 @@ export function PatternsStep({ draft, update }: StepProps) {
 
 export function SummaryStep({ draft }: { draft: ThoughtWithDetails }) {
   const { t } = useTranslation();
-  const colors = useColors();
-  const scaleLabel = useScaleLabel();
   return (
     <>
       <StepHeader title={t('flow.step6.title')} hint={t('flow.step6.hint')} />
-      <ThoughtQuote text={draft.text} />
-      <View style={styles.summaryRow}>
-        <Text style={[styles.summaryLabel, { color: colors.textMuted }]}>{t('detail.initialBelief')}</Text>
-        <Text style={[styles.body, { color: colors.text }]}>
-          {draft.initialBelief}% · {scaleLabel('belief', draft.initialBelief)}
-        </Text>
-      </View>
       <ThoughtSummary thought={draft} />
     </>
   );
@@ -580,8 +571,6 @@ const styles = StyleSheet.create({
   },
   patternTitle: { flex: 1, fontSize: 16, fontWeight: '500' },
   patternDetails: { gap: spacing.sm, paddingBottom: spacing.md, paddingLeft: 42, paddingRight: spacing.sm },
-  summaryRow: { gap: 2 },
-  summaryLabel: { fontSize: 14 },
   change: { fontSize: 17, fontWeight: '600' },
   alternativeBlock: { gap: spacing.sm, marginTop: spacing.md },
   optionalRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },

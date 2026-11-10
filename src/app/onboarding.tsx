@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../components/Button';
-import { useScaleLabel } from '../components/BeliefSlider';
 import { Mascot, type MascotVariant } from '../components/Mascot';
 import { ThoughtSummary } from '../components/ThoughtSummary';
 import { setOnboardingDone } from '../db/settings';
@@ -23,7 +22,6 @@ const PAGES: { key: 'page1' | 'page2' | 'example' | 'page3'; mascot?: MascotVari
 export default function OnboardingScreen() {
   const { t } = useTranslation();
   const colors = useColors();
-  const scaleLabel = useScaleLabel();
   const [index, setIndex] = useState(0);
   const page = PAGES[index];
   const last = index === PAGES.length - 1;
@@ -52,23 +50,8 @@ export default function OnboardingScreen() {
         </Text>
         <Text style={[styles.body, { color: colors.text }]}>{t(`onboarding.${page.key}.body`)}</Text>
         {page.key === 'example' && (
-          <View style={[styles.example, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-            <View style={[styles.quote, { borderLeftColor: colors.primary }]}>
-              <Text style={[styles.quoteText, { color: colors.text }]}>{example.text}</Text>
-            </View>
+          <View style={styles.example}>
             <ThoughtSummary thought={example} showBalance />
-            <View style={styles.row}>
-              <Text style={[styles.label, { color: colors.textMuted }]}>{t('detail.alternative')}</Text>
-              <Text style={[styles.value, { color: colors.text }]}>{example.alternativeThought}</Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={[styles.value, { color: colors.text, fontWeight: '600' }]}>
-                {t('flow.step8.change', { before: example.initialBelief, after: example.finalBelief })}
-              </Text>
-              <Text style={[styles.label, { color: colors.textMuted }]}>
-                {scaleLabel('belief', example.initialBelief)} → {scaleLabel('belief', example.finalBelief ?? 0)}
-              </Text>
-            </View>
           </View>
         )}
         {page.key === 'page3' && (
@@ -109,12 +92,7 @@ const styles = StyleSheet.create({
   body: { fontSize: 17, lineHeight: 25, textAlign: 'center' },
   notice: { borderWidth: 1, borderRadius: radius.md, padding: spacing.md, gap: spacing.sm },
   noticeText: { fontSize: 15, lineHeight: 21 },
-  example: { borderWidth: 1, borderRadius: radius.md, padding: spacing.md, gap: spacing.md },
-  quote: { borderLeftWidth: 4, paddingLeft: spacing.md },
-  quoteText: { fontSize: 18, lineHeight: 26 },
-  row: { gap: 2 },
-  label: { fontSize: 14 },
-  value: { fontSize: 16, lineHeight: 22 },
+  example: { gap: spacing.md, marginTop: spacing.sm },
   actions: { flexDirection: 'row', gap: spacing.sm, padding: spacing.md },
   flex: { flex: 1 },
 });
