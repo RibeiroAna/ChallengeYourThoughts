@@ -77,6 +77,11 @@
     },
     "step7": {
       "title": "Um olhar mais equilibrado",
+      "hint": "Um pensamento alternativo é uma forma mais equilibrada e realista de ver a situação. Não se trata de se obrigar a pensar positivo. Ele leva em conta as evidências a favor e contra e os padrões de pensamento que você percebeu.",
+      "helpTitle": "Perguntas que podem ajudar:",
+      "help1": "Olhando para todas as evidências, o que é mais provável que seja verdade?",
+      "help2": "O que você diria a uma pessoa querida que tivesse esse pensamento?",
+      "help3": "Se você percebeu um padrão de pensamento, como o pensamento soaria sem ele?",
       "alternativeLabel": "Pensamento alternativo",
       "alternativePlaceholder": "Qual seria uma forma mais equilibrada de ver isso?"
     },
@@ -211,6 +216,7 @@
   },
   "settings": {
     "title": "Configurações",
+    "general": "Geral",
     "language": "Idioma",
     "languageSystem": "Idioma do aparelho",
     "reminders": "Lembretes",
@@ -238,6 +244,10 @@
     "page2": {
       "title": "Como funciona um desafio de pensamento",
       "body": "Escreva o pensamento, avalie o quanto acredita nele, veja as evidências a favor e contra, identifique padrões de pensamento e encontre um olhar mais equilibrado."
+    },
+    "example": {
+      "title": "Como fica um desafio concluído",
+      "body": "Aqui está um exemplo, para você saber o que te espera. Ele também aparece na sua lista de pensamentos, e você pode apagá-lo quando quiser."
     },
     "page3": {
       "title": "Privado e no seu aparelho",
@@ -269,6 +279,63 @@
       "4": "Bastante convincente",
       "5": "Muito convincente",
       "6": "Totalmente convincente"
+    }
+  },
+  "example": {
+    "thought": "EXEMPLO: Vou estragar a apresentação de amanhã, e todo mundo vai achar que sou incompetente.",
+    "positive1": "Ele me motiva a me preparar bem.",
+    "negative1": "Mal consigo dormir.",
+    "negative2": "Sinto tanta ansiedade que evito ensaiar.",
+    "for1": "Eu me enrolei com as palavras na última reunião.",
+    "for2": "Meu coração dispara quando falo em público.",
+    "against1": "Minhas últimas apresentações foram bem, e recebi bons comentários.",
+    "against2": "Me pediram para apresentar por causa do meu bom trabalho no projeto.",
+    "against3": "Preparei os slides e ensaiei duas vezes.",
+    "alternative": "Posso sentir nervosismo e cometer pequenos erros, mas me preparei bem. Uma apresentação não decide se sou competente."
+  },
+  "about": {
+    "title": "Sobre o app",
+    "author": "Oi! Eu também faço TCC e criei este app gratuito e de código aberto para ajudar outras pessoas na terapia delas.",
+    "contact": "Dúvidas ou ideias? Escreva para mim:",
+    "license": "Software livre, licenciado sob a GNU General Public License, versão 3 ou posterior."
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "what": {
+      "question": "O que é um desafio de pensamento?",
+      "answer": "É um exercício da TCC. Você anota um pensamento que incomoda, avalia o quanto acredita nele, olha o que ele te traz e as evidências a favor e contra, identifica padrões de pensamento e depois escreve um pensamento mais equilibrado. No fim, você avalia o pensamento original de novo para ver se algo mudou."
+    },
+    "noAi": {
+      "question": "Por que não há IA no app?",
+      "answer": "Porque a ideia é que a reflexão seja sua. Procurar evidências, identificar padrões e encontrar um olhar mais equilibrado com a sua própria cabeça é o que ajuda você a aprender a desafiar seus pensamentos. Quando uma IA pensa por você, isso não ajuda no processo terapêutico."
+    },
+    "example": {
+      "question": "O que é o pensamento EXEMPLO na minha lista?",
+      "answer": "Ele mostra como pode ficar um desafio de pensamento concluído. Ele não é seu, então você pode apagá-lo quando quiser."
+    },
+    "belief": {
+      "question": "Por que avalio o quanto acredito em um pensamento?",
+      "answer": "Avaliar o pensamento antes e depois do desafio ajuda você a perceber mudanças. É normal se o número mudar só um pouco; mesmo uma pequena mudança conta."
+    },
+    "patterns": {
+      "question": "O que são padrões de pensamento?",
+      "answer": "Formas comuns de a nossa mente distorcer a realidade, como esperar o pior ou achar que sabemos o que os outros pensam. Na TCC, costumam ser chamados de distorções cognitivas. Reconhecê-los facilita tomar distância de um pensamento."
+    },
+    "privacy": {
+      "question": "Onde meus pensamentos ficam salvos?",
+      "answer": "Apenas neste aparelho. Não há conta, servidor nem sincronização na nuvem, e o app nunca envia o que você escreve para lugar nenhum."
+    },
+    "dictation": {
+      "question": "O ditado envia minha voz para algum lugar?",
+      "answer": "Não. O ditado usa só o reconhecimento de fala do próprio aparelho. Se ele não estiver disponível para o seu idioma, o botão do microfone fica oculto. Você sempre pode digitar."
+    },
+    "share": {
+      "question": "Posso levar um pensamento para a terapia?",
+      "answer": "Sim. Abra um pensamento e toque no botão de download para salvá-lo como arquivo Markdown. O menu de compartilhamento do celular deixa você escolher para onde ele vai; o app em si não envia nada."
+    },
+    "therapy": {
+      "question": "Este app pode substituir a terapia?",
+      "answer": "Não. Ele apoia a prática da TCC, mas não substitui um terapeuta nem ajuda profissional. Se você estiver em crise, procure imediatamente o serviço de emergência local ou uma linha de apoio emocional."
     }
   }
 }

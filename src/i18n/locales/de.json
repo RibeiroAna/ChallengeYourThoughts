@@ -77,6 +77,11 @@
     },
     "step7": {
       "title": "Ein ausgewogenerer Blick",
+      "hint": "Ein alternativer Gedanke ist eine ausgewogenere und realistischere Sicht auf die Situation. Es geht nicht darum, dich zu positivem Denken zu zwingen. Er berücksichtigt die Belege dafür und dagegen und die Denkmuster, die dir aufgefallen sind.",
+      "helpTitle": "Fragen, die helfen können:",
+      "help1": "Was ist, wenn du alle Belege anschaust, am wahrscheinlichsten wahr?",
+      "help2": "Was würdest du einer guten Freundin oder einem guten Freund mit diesem Gedanken sagen?",
+      "help3": "Wenn dir ein Denkmuster aufgefallen ist: Wie würde der Gedanke ohne es klingen?",
       "alternativeLabel": "Alternativer Gedanke",
       "alternativePlaceholder": "Wie könnte man das ausgewogener sehen?"
     },
@@ -211,6 +216,7 @@
   },
   "settings": {
     "title": "Einstellungen",
+    "general": "Allgemein",
     "language": "Sprache",
     "languageSystem": "Gerätesprache",
     "reminders": "Erinnerungen",
@@ -238,6 +244,10 @@
     "page2": {
       "title": "So funktioniert das Hinterfragen",
       "body": "Schreib den Gedanken auf, bewerte, wie sehr du ihn glaubst, sammle Belege dafür und dagegen, erkenne Denkmuster und finde einen ausgewogeneren Blick."
+    },
+    "example": {
+      "title": "So sieht ein fertiges Hinterfragen aus",
+      "body": "Hier ist ein Beispiel, damit du weißt, was dich erwartet. Du findest es auch in deiner Liste und kannst es jederzeit löschen."
     },
     "page3": {
       "title": "Privat und auf deinem Gerät",
@@ -269,6 +279,63 @@
       "4": "Ziemlich überzeugend",
       "5": "Sehr überzeugend",
       "6": "Vollkommen überzeugend"
+    }
+  },
+  "example": {
+    "thought": "BEISPIEL: Ich werde die Präsentation morgen vermasseln, und alle werden mich für inkompetent halten.",
+    "positive1": "Er bringt mich dazu, mich gut vorzubereiten.",
+    "negative1": "Ich kann kaum schlafen.",
+    "negative2": "Ich bin so nervös, dass ich das Üben vermeide.",
+    "for1": "In der letzten Besprechung habe ich mich verhaspelt.",
+    "for2": "Mein Herz rast, wenn ich vor Leuten spreche.",
+    "against1": "Meine letzten Präsentationen liefen gut, und ich habe gutes Feedback bekommen.",
+    "against2": "Man hat mich gebeten zu präsentieren, weil ich im Projekt gute Arbeit geleistet habe.",
+    "against3": "Ich habe die Folien vorbereitet und zweimal geübt.",
+    "alternative": "Vielleicht bin ich nervös und mache kleine Fehler, aber ich habe mich gut vorbereitet. Eine einzelne Präsentation entscheidet nicht darüber, ob ich kompetent bin."
+  },
+  "about": {
+    "title": "Über die App",
+    "author": "Hallo! Ich mache selbst eine KVT und habe diese kostenlose Open-Source-App entwickelt, um anderen Menschen bei ihrer Therapie zu helfen.",
+    "contact": "Fragen oder Ideen? Schreib mir:",
+    "license": "Freie Software, lizenziert unter der GNU General Public License, Version 3 oder später."
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "what": {
+      "question": "Was bedeutet es, einen Gedanken zu hinterfragen?",
+      "answer": "Es ist eine Übung aus der KVT. Du schreibst einen belastenden Gedanken auf, bewertest, wie sehr du ihn glaubst, schaust, was er dir bringt, sammelst Belege dafür und dagegen, erkennst Denkmuster und schreibst dann einen ausgewogeneren Gedanken. Zum Schluss bewertest du den ursprünglichen Gedanken noch einmal und siehst, ob sich etwas verändert hat."
+    },
+    "noAi": {
+      "question": "Warum gibt es in der App keine KI?",
+      "answer": "Weil du selbst nachdenken sollst. Wenn du mit deinem eigenen Kopf Belege suchst, Denkmuster erkennst und einen ausgewogeneren Blick findest, lernst du, deine Gedanken zu hinterfragen. Wenn eine KI das Denken für dich übernimmt, hilft das dem therapeutischen Prozess nicht."
+    },
+    "example": {
+      "question": "Was ist der BEISPIEL-Gedanke in meiner Liste?",
+      "answer": "Er zeigt, wie ein fertig hinterfragter Gedanke aussehen kann. Er stammt nicht von dir, du kannst ihn also jederzeit löschen."
+    },
+    "belief": {
+      "question": "Warum bewerte ich, wie sehr ich einen Gedanken glaube?",
+      "answer": "Wenn du den Gedanken vor und nach dem Hinterfragen bewertest, merkst du, ob sich etwas verändert. Es ist normal, wenn sich die Zahl nur ein wenig bewegt; auch eine kleine Veränderung zählt."
+    },
+    "patterns": {
+      "question": "Was sind Denkmuster?",
+      "answer": "Typische Arten, wie unser Kopf die Wirklichkeit verzerrt, zum Beispiel das Schlimmste zu erwarten oder zu glauben, man wüsste, was andere denken. In der KVT heißen sie oft kognitive Verzerrungen. Wenn du sie erkennst, gewinnst du leichter Abstand zu einem Gedanken."
+    },
+    "privacy": {
+      "question": "Wo werden meine Gedanken gespeichert?",
+      "answer": "Nur auf diesem Gerät. Es gibt kein Konto, keinen Server und keine Cloud-Synchronisierung, und die App sendet nichts von dem, was du schreibst."
+    },
+    "dictation": {
+      "question": "Wird beim Diktieren meine Stimme irgendwohin gesendet?",
+      "answer": "Nein. Das Diktieren nutzt nur die Spracherkennung direkt auf deinem Gerät. Ist sie für deine Sprache nicht verfügbar, wird die Mikrofontaste ausgeblendet. Tippen geht immer."
+    },
+    "share": {
+      "question": "Kann ich einen Gedanken in die Therapie mitnehmen?",
+      "answer": "Ja. Öffne einen Gedanken und tippe auf die Download-Taste, um ihn als Markdown-Datei zu speichern. Über das Teilen-Menü deines Telefons entscheidest du, wohin sie geht; die App selbst lädt nichts hoch."
+    },
+    "therapy": {
+      "question": "Kann die App eine Therapie ersetzen?",
+      "answer": "Nein. Sie unterstützt dich beim Üben von KVT, ersetzt aber keine Therapie und keine professionelle Hilfe. Wenn du in einer Krise bist, wende dich bitte sofort an den Notruf oder eine Krisenhotline."
     }
   }
 }

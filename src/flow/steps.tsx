@@ -438,10 +438,19 @@ export function SummaryStep({ draft }: { draft: ThoughtWithDetails }) {
 
 export function AlternativeStep({ draft, update }: StepProps) {
   const { t } = useTranslation();
+  const colors = useColors();
   return (
     <>
       <ThoughtQuote text={draft.text} />
-      <StepHeader title={t('flow.step7.title')} />
+      <StepHeader title={t('flow.step7.title')} hint={t('flow.step7.hint')} />
+      <View style={styles.helpBlock}>
+        <Text style={[styles.hint, { color: colors.textMuted }]}>{t('flow.step7.helpTitle')}</Text>
+        {(['help1', 'help2', 'help3'] as const).map((key) => (
+          <Text key={key} style={[styles.hint, { color: colors.textMuted }]}>
+            • {t(`flow.step7.${key}`)}
+          </Text>
+        ))}
+      </View>
       <DictationInput
         label={t('flow.step7.alternativeLabel')}
         value={draft.alternativeThought ?? ''}
@@ -541,6 +550,7 @@ const styles = StyleSheet.create({
   header: { gap: spacing.xs },
   title: { fontSize: 22, fontWeight: '700', lineHeight: 28 },
   hint: { fontSize: 15, lineHeight: 21 },
+  helpBlock: { gap: spacing.xs },
   body: { fontSize: 16, lineHeight: 22 },
   centerText: { textAlign: 'center' },
   quote: { borderLeftWidth: 4, borderRadius: radius.sm, padding: spacing.md },

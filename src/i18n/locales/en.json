@@ -77,6 +77,11 @@
     },
     "step7": {
       "title": "A more balanced view",
+      "hint": "An alternative thought is a more balanced and realistic way of seeing the situation. It isn't about forcing yourself to think positively. It takes into account the evidence for and against, and the thinking patterns you noticed.",
+      "helpTitle": "Questions that can help:",
+      "help1": "Looking at all the evidence, what is most likely true?",
+      "help2": "What would you say to a good friend who had this thought?",
+      "help3": "If you noticed a thinking pattern, how would the thought sound without it?",
       "alternativeLabel": "Alternative thought",
       "alternativePlaceholder": "What would be a more balanced way to see this?"
     },
@@ -211,6 +216,7 @@
   },
   "settings": {
     "title": "Settings",
+    "general": "General",
     "language": "Language",
     "languageSystem": "Device language",
     "reminders": "Reminders",
@@ -238,6 +244,10 @@
     "page2": {
       "title": "How a thought challenge works",
       "body": "Write the thought, rate how much you believe it, look at the evidence for and against, spot thinking patterns, and find a more balanced view."
+    },
+    "example": {
+      "title": "What a finished challenge looks like",
+      "body": "Here's an example, so you know what's waiting for you. You'll also find it in your list of thoughts, and you can delete it whenever you like."
     },
     "page3": {
       "title": "Private and on your device",
@@ -269,6 +279,63 @@
       "4": "Quite convincing",
       "5": "Very convincing",
       "6": "Completely convincing"
+    }
+  },
+  "example": {
+    "thought": "EXAMPLE: I'm going to mess up the presentation tomorrow, and everyone will think I'm incompetent.",
+    "positive1": "It pushes me to prepare well.",
+    "negative1": "I can hardly sleep.",
+    "negative2": "I feel so anxious that I avoid practising.",
+    "for1": "I stumbled over my words in the last meeting.",
+    "for2": "My heart races when I speak in front of people.",
+    "against1": "My last presentations went well, and I got good feedback.",
+    "against2": "I was asked to present because of my good work on the project.",
+    "against3": "I've prepared the slides and practised twice.",
+    "alternative": "I might be nervous and make small mistakes, but I've prepared well. One presentation doesn't decide whether I'm competent."
+  },
+  "about": {
+    "title": "About the app",
+    "author": "Hi! I'm a CBT patient myself, and I made this free and open-source app to help other people with their therapy.",
+    "contact": "Questions or ideas? Write to me:",
+    "license": "Free software, licensed under the GNU General Public License, version 3 or later."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "what": {
+      "question": "What is a thought challenge?",
+      "answer": "It's an exercise from CBT. You write down a thought that bothers you, rate how much you believe it, look at what it brings you and at the evidence for and against it, notice thinking patterns, and then write a more balanced thought. At the end you rate the original thought again to see whether anything has changed."
+    },
+    "noAi": {
+      "question": "Why is there no AI in the app?",
+      "answer": "Because you are supposed to do the thinking yourself. Looking for evidence, spotting patterns and finding a more balanced view with your own mind is what helps you learn to challenge your thoughts. When an AI does the thinking for you, it doesn't help with the therapeutic process."
+    },
+    "example": {
+      "question": "What is the EXAMPLE thought in my list?",
+      "answer": "It shows what a finished thought challenge can look like. It isn't yours, so you can delete it whenever you like."
+    },
+    "belief": {
+      "question": "Why do I rate how much I believe a thought?",
+      "answer": "Rating the thought before and after the challenge helps you notice change. It's normal if the number only moves a little; even a small shift counts."
+    },
+    "patterns": {
+      "question": "What are thinking patterns?",
+      "answer": "Common ways our mind bends reality, like expecting the worst or assuming we know what others think. In CBT they're often called cognitive distortions. Spotting them makes it easier to step back from a thought."
+    },
+    "privacy": {
+      "question": "Where are my thoughts stored?",
+      "answer": "Only on this device. There's no account, no server and no cloud sync, and the app never sends what you write anywhere."
+    },
+    "dictation": {
+      "question": "Does dictation send my voice anywhere?",
+      "answer": "No. Dictation only uses your phone's on-device speech recognition. If that isn't available for your language, the microphone button is hidden. You can always type instead."
+    },
+    "share": {
+      "question": "Can I share a thought with my therapist?",
+      "answer": "Yes. Open a thought and tap the download button to save it as a Markdown file. Your phone's share sheet lets you choose where it goes; the app itself doesn't upload anything."
+    },
+    "therapy": {
+      "question": "Can this app replace therapy?",
+      "answer": "No. It supports CBT practice, but it doesn't replace a therapist or professional help. If you are in crisis, please contact your local emergency services or a crisis line right away."
     }
   }
 }

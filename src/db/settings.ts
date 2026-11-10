@@ -30,3 +30,11 @@ export function isOnboardingDone(): boolean {
 export function setOnboardingDone(done: boolean) {
   set('onboardingDone', done ? '1' : '0');
 }
+
+export function isExampleAdded(): boolean {
+  return get('exampleAdded') === '1';
+}
+
+export function setExampleAdded() {
+  set('exampleAdded', '1');
+}

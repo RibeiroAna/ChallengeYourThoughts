@@ -19,6 +19,10 @@ export default function SettingsScreen() {
   const colors = useColors();
   const inset = useHeaderInset();
   const [language, setLanguage] = useState<LanguageSetting>(getLanguageSetting);
+  const [languageOpen, setLanguageOpen] = useState(false);
+
+  const languageName = (setting: LanguageSetting) =>
+    setting === 'system' ? t('settings.languageSystem') : t(`languages.${setting}`);
 
   const chooseLanguage = async (setting: LanguageSetting) => {
     setLanguage(setting);
@@ -56,28 +60,40 @@ export default function SettingsScreen() {
         style={{ backgroundColor: colors.background }}
         contentContainerStyle={[styles.content, { paddingTop: inset.paddingTop + spacing.md }]}
       >
-        {sectionTitle(t('settings.language'))}
+        {sectionTitle(t('settings.general'))}
         <View style={[styles.group, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-          {LANGUAGE_OPTIONS.map((option, index) => {
-            const selected = option === language;
-            return (
-              <Pressable
-                key={option}
-                accessibilityRole="radio"
-                accessibilityState={{ checked: selected }}
-                onPress={() => chooseLanguage(option)}
-                style={[
-                  styles.row,
-                  index > 0 && { borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth },
-                ]}
-              >
-                <Text style={[styles.rowText, { color: colors.text }]}>
-                  {option === 'system' ? t('settings.languageSystem') : t(`languages.${option}`)}
-                </Text>
-                {selected && <Ionicons name="checkmark" size={22} color={colors.primary} />}
-              </Pressable>
-            );
-          })}
+          <Pressable
+            accessibilityRole="button"
+            accessibilityState={{ expanded: languageOpen }}
+            onPress={() => setLanguageOpen(!languageOpen)}
+            style={styles.row}
+          >
+            <Text style={[styles.rowText, { color: colors.text }]}>{t('settings.language')}</Text>
+            <View style={styles.rowEnd}>
+              <Text style={[styles.rowValue, { color: colors.textMuted }]}>{languageName(language)}</Text>
+              <Ionicons name={languageOpen ? 'chevron-up' : 'chevron-down'} size={20} color={colors.textMuted} />
+            </View>
+          </Pressable>
+          {languageOpen &&
+            LANGUAGE_OPTIONS.map((option) => {
+              const selected = option === language;
+              return (
+                <Pressable
+                  key={option}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: selected }}
+                  onPress={() => chooseLanguage(option)}
+                  style={[
+                    styles.row,
+                    styles.option,
+                    { borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth },
+                  ]}
+                >
+                  <Text style={[styles.rowText, { color: colors.text }]}>{languageName(option)}</Text>
+                  {selected && <Ionicons name="checkmark" size={22} color={colors.primary} />}
+                </Pressable>
+              );
+            })}
         </View>
 
         {sectionTitle(t('settings.reminders'))}
@@ -91,14 +107,28 @@ export default function SettingsScreen() {
         </Pressable>
 
         {sectionTitle(t('settings.about'))}
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push('/onboarding')}
-          style={[styles.group, styles.row, { backgroundColor: colors.surface, borderColor: colors.border }]}
-        >
-          <Text style={[styles.rowText, { color: colors.text }]}>{t('settings.disclaimer')}</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
-        </Pressable>
+        <View style={[styles.group, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+          <Pressable accessibilityRole="button" onPress={() => router.push('/about')} style={styles.row}>
+            <Text style={[styles.rowText, { color: colors.text }]}>{t('about.title')}</Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
+          </Pressable>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push('/faq')}
+            style={[styles.row, { borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth }]}
+          >
+            <Text style={[styles.rowText, { color: colors.text }]}>{t('faq.title')}</Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
+          </Pressable>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push('/onboarding')}
+            style={[styles.row, { borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth }]}
+          >
+            <Text style={[styles.rowText, { color: colors.text }]}>{t('settings.disclaimer')}</Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
+          </Pressable>
+        </View>
 
         {sectionTitle(t('settings.data'))}
         <Text style={[styles.note, { color: colors.textMuted }]}>{t('settings.privacyNote')}</Text>
@@ -121,5 +151,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
   },
   rowText: { fontSize: 16 },
+  rowEnd: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, flexShrink: 1 },
+  rowValue: { fontSize: 16, flexShrink: 1 },
+  option: { paddingLeft: spacing.lg },
   note: { fontSize: 15, lineHeight: 21 },
 });

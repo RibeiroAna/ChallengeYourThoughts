@@ -74,12 +74,11 @@ export function getThought(id: number): ThoughtWithDetails | null {
   return { ...thought, evidence, effects, patterns };
 }
 
-export function createThought(text: string, initialBelief = DEFAULT_BELIEF): number {
-  const now = new Date().toISOString();
+export function createThought(text: string, initialBelief = DEFAULT_BELIEF, createdAt = new Date().toISOString()): number {
   const result = getDb().runSync(
     'INSERT INTO thoughts (createdAt, updatedAt, text, initialBelief, status, currentStep) VALUES (?, ?, ?, ?, ?, ?)',
-    now,
-    now,
+    createdAt,
+    createdAt,
     text,
     initialBelief,
     'in_progress',

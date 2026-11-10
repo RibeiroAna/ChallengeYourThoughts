@@ -97,6 +97,16 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it
 - Notification text is localised in the user's language and phrased gently.
 - Ask for notification permission only when the user first sets a reminder.
 
+### Example thought
+- On first launch (and again after "delete all data"), a finished example challenge is added as the oldest thought. Its text starts with "EXAMPLE" (translated: "BEISPIEL", "EXEMPLO") so it can't be mistaken for the user's own.
+- It's written in the app language at the time it's added; changing the language later doesn't translate it.
+- The user can delete it like any other thought; it is not added again unless all data is deleted.
+- The same example is shown on the onboarding example screen.
+
+### FAQ
+- Reached from Settings → About. Questions and answers live in the translation files.
+- Includes why there is no AI: the user is supposed to do the thinking themselves, which is what helps them learn to challenge their thoughts. An AI doing the thinking doesn't help the therapeutic process.
+
 ### Settings
 - App language (defaults to the device language if supported, otherwise English).
 - Reminder management.
@@ -124,7 +134,8 @@ Every thought goes through Steps 1–2. After Step 2, the user chooses **Save it
 - Placement: stretch → onboarding/welcome; laptop → onboarding; idle → empty states; wave → challenge complete. No mascot on the flow steps.
 
 ### Onboarding
-- A short intro (2–3 screens) explaining what a thought challenge is, with the sloth.
+- A short intro (4 screens) explaining what a thought challenge is, with the sloth.
+- One screen shows a finished example challenge (no mascot there), so the user knows what's waiting for them.
 - States clearly that all data stays on the device.
 - A note that the app is not a replacement for professional help, plus a pointer to crisis resources. **[Decision needed: content per language/region]**
 
@@ -195,7 +206,7 @@ Reminder
   id, time (HH:mm), weekdays[], enabled, notificationIds[]
 
 Settings
-  language, onboardingDone, (appLock, ...)
+  language, onboardingDone, exampleAdded, (appLock, ...)
 ```
 
 ---
